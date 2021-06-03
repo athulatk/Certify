@@ -1,0 +1,40 @@
+.login__form{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    margin-top: 0.8em;
+}
+.login__div{
+    max-width: 500px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border: 1px solid black;
+    border-radius:10px;
+    padding: 1em;
+}
+.login__div>h5{
+    margin-top:1em;
+}
+.login__inputs{
+    align-items:center;
+}
+
+input{
+    margin-bottom:1em;
+    border: 1px solid gray;
+    outline: none;
+    width: 100%;
+    padding:0.25em 0 0.25em 0.2em;
+    border-radius: 5px;
+    
+} 
+.login__buttons{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top:1em;
+}
+.login__buttons>button{
+    margin-left:15px;
+}
