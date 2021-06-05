@@ -1,0 +1,33 @@
+.login_page{
+    background-color: #E1E1E1; 
+    min-height: 100vh;
+    width: 100vw; 
+    position: relative;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    z-index:2;
+    overflow: hidden;
+}
+#topcorner{
+    position:absolute;
+    top:-1em;
+    left:-1.2em;
+    z-index: -1;
+}
+#bottomcorner{
+    position:absolute;
+    bottom:-1em;
+    right:-1.2em;
+    z-index:-1;
+}
+#objects{
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+}
+#logo{
+    width:150px;
+    margin-bottom: 1.5em;
+}
