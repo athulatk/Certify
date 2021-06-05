@@ -16,7 +16,7 @@
     
 }
 .login__div>h3{
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
     
 }
 .login__outerdiv{
@@ -37,7 +37,7 @@ border-radius: 10px;
     border-radius: 10px 0 0 10px;
 }
 .login__div>h5{
-    margin-top:1em;
+    margin-top:1.3em;
 }
 .login__inputs{
     display:flex;
