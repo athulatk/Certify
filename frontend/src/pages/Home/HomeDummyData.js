@@ -5,6 +5,7 @@ const HomeDummyData=[
         date:"24-04-2021",
         letter:"Bonafide.pdf",
         status:"HOD",
+        msg:"Resubmit the request letter with the admission number and phone number.",
         inProgress:true,
         returned:true,
         approved:false,

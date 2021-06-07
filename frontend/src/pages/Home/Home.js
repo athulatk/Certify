@@ -7,6 +7,8 @@ import ApplyIcon from '../../assets/apply.svg'
 import SearchIcon from '../../assets/search.svg'
 import DummyData from './HomeDummyData'
 import InProgress from '../InProgress/InProgress'
+import Returned from '../Returned/Returned'
+
 
 export default function Home() {
 
@@ -53,9 +55,9 @@ export default function Home() {
                 
             <div className="pl-9 w-full text-left text-xl">Dashboard</div>
 
-            <section className="flex flex-col space-y-8 w-11/12 items-center">
+            <section className="flex flex-col space-y-8 w-11/12 items-center ">
                 <div className="text-lg text-left w-full">Welcome Peter</div>
-                <section className="flex justify-between w-full">
+                <section className="flex justify-between w-full  ">
                     <button 
                         className={"mr-3 focus:outline-none "+(active==="progress"?"dashboard-button-click":"dashboard-button ")}
                         onClick={()=>{setActive("progress")}}>
@@ -65,7 +67,7 @@ export default function Home() {
                         
                         <div className="text-2xl font-bold">{inProgress.length}</div>
                         <div className="text-lg font-semibold">In Progress</div>
-                        <div className="text-sm text-left">Details about the progress of the certificate</div>
+                        <div className={active==="progress"?"text-xs text-left visible":"text-xs text-left invisible"}>Details about the progress of the certificate</div>
                     </button>
 
                     <button 
@@ -76,6 +78,7 @@ export default function Home() {
                         </div>
                         <div className="text-2xl font-bold">{returned.length}</div>
                         <div className="text-lg font-semibold">Returned</div>
+                        <div className={active==="returned"?"text-xs text-left visible":"text-xs text-left invisible"}>Details of the certificate which are returned.</div>
                     </button>
 
                     <button 
@@ -86,6 +89,7 @@ export default function Home() {
                         </div>
                         <div className="text-2xl font-bold">{approved.length}</div>
                         <div className="text-lg font-semibold">Approved</div>
+                        <div className={active==="approved"?"text-xs text-left visible":"text-xs text-left invisible"}>Details of the certificate which are approved.</div>
                     </button>
 
                     <button 
@@ -95,10 +99,12 @@ export default function Home() {
                           <img className="h-5 w-5" src={ApplyIcon} alt=""/>
                         </div>
                         <div className="text-lg font-semibold pt-8 text-left">Apply for certificates</div>
+                        <div className={active==="apply"?"text-xs text-left visible":"text-xs text-left invisible"}>Submit application for new certificate.</div>
                     </button>
                 </section>
 
                 {(active==="progress")&&(<InProgress inProgress={inProgress}/>)}
+                {(active==="returned")&&(<Returned returned={returned}/>)}
             </section>
         </div>
     )
