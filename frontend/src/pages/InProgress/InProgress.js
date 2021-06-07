@@ -55,9 +55,11 @@ export default function InProgress({inProgress}) {
                 </div>
             </section>
 
-            <div className="h-7 w-7">
-                <img src={DownloadIcon} alt=""/>
-            </div>
+            <section className="w-2/12 flex justify-center">
+                <div className="h-7 w-7">
+                    <img src={DownloadIcon} alt=""/>
+                </div>
+            </section>
         </div>)
     }
 
