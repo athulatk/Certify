@@ -16,6 +16,7 @@ const HomeDummyData=[
         date:"03-04-2021",
         letter:"Transfer.pdf",
         status:"HOD",
+
         inProgress:true,
         returned:false,
         approved:false,
@@ -26,9 +27,12 @@ const HomeDummyData=[
         date:"18-04-2021",
         letter:"MCM.pdf",
         status:"Dean Office",
+        certifiedDate:"12-03-2021",
+        approvedRemark:"No remake",
+        scannedFile:"Scanned_file.pdf",
         inProgress:true,
         returned:false,
-        approved:false,
+        approved:true,
     },
     {
         name:"Fee certificate",

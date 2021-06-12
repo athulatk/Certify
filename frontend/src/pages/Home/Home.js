@@ -8,6 +8,8 @@ import SearchIcon from '../../assets/search.svg'
 import DummyData from './HomeDummyData'
 import InProgress from '../InProgress/InProgress'
 import Returned from '../Returned/Returned'
+import Approved from '../Approved/Approved'
+import Apply from '../Apply/Apply'
 
 
 export default function Home() {
@@ -105,6 +107,8 @@ export default function Home() {
 
                 {(active==="progress")&&(<InProgress inProgress={inProgress}/>)}
                 {(active==="returned")&&(<Returned returned={returned}/>)}
+                {(active==="approved")&&(<Approved approved={approved}/>)}
+                {(active==="apply")&&(<Apply/>)} 
             </section>
         </div>
     )

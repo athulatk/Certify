@@ -13,24 +13,25 @@ export default function InProgress({inProgress}) {
             </section>
                 
             <section className="w-2/12 flex justify-center">
-                <div className="text-md flex items-center justify-center ">
+                <div className="text-sm flex items-center justify-center ">
                     <div>{data.name}</div>
                 </div>
             </section>
 
             <section className="w-2/12 flex justify-center">
-                <div className="text-md flex items-center justify-center ">
+                <div className="text-sm flex items-center justify-center ">
                     <div>{data.category}</div>
                 </div>
             </section>
 
             <section className="w-2/12 flex justify-center text-md">
                 <div className="flex flex-col items-center">
-                    <div className="text-md flex items-center justify-center ">
+                <div className="text-xs">Applied date:</div>
+                    <div className="text-sm flex items-center justify-center ">
                         <div>{data.date}</div>
                     </div>
 
-                    <div className="text-md">Applied date</div>
+                    
                 </div>
             </section>
 
@@ -41,7 +42,7 @@ export default function InProgress({inProgress}) {
                             <div className="p-4">R</div>
                         </div>
                     )}
-                    <div className="flex items-center justify-center pr-3">
+                    <div className="text-sm flex items-center justify-center pr-3">
                         <div>
                             {data.status}
                         </div>
@@ -50,7 +51,7 @@ export default function InProgress({inProgress}) {
             </section>
 
             <section className="w-2/12 flex justify-center">
-                <div className="text-md flex items-center justify-center text-blue-500 cursor-pointer">
+                <div className="text-sm flex items-center justify-center text-blue-500 cursor-pointer">
                     <div>{data.letter}</div>
                 </div>
             </section>
