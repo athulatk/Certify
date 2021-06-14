@@ -1,16 +1,18 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './Loginform.css'
-import {Button,TextField} from '@material-ui/core'
+import {Button} from '@material-ui/core'
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 function Loginform() {
+
+    const [showPassword,setShowPassword]=useState(false)
     return (
         <div className="login__outerdiv">
             <div className="login__side">
             <h4>Welcome back!</h4>
             </div>
         <div className="login__div">
-            <h3>Login</h3>
+            <h2 style={{fontSize:'23px'}}>Login</h2>
             <hr/>
             <h5>Welcome Back!</h5>
             <p style={{fontSize:'12px',marginBottom:'0.5em'}}>Please log in to your account</p>
@@ -18,14 +20,16 @@ function Loginform() {
                 <div className="login__inputs">
                 <div>
                 <label>UserId</label><br/>
-                <input type="text" size="40" placeholder="Enter userid"/>
-                {/* <TextField id="outlined-basic" label="UserId" variant="outlined" /> */}
+                <input type="text" size="30" placeholder="Enter userid"/>
                 </div>
                 <div>
                 <label>Password</label><br/>
-                <input type="password" size="40" placeholder="Enter password"/>
-                {/* <TextField id="outlined-basic" type="password" label="Password" variant="outlined"/> */}
-                {/* <VisibilityOffIcon/> */}
+                <div className="passwordcomp">
+                <input type={showPassword?"text":"password"} size="30" placeholder="Enter password"/>
+                <div className="icon" onClick={()=>setShowPassword(!showPassword)}>
+                {showPassword?<VisibilityIcon style={{color:'#827876'}}/>:<VisibilityOffIcon style={{color:'#827876'}}/>}
+                </div>
+                </div>
                 </div>
                 </div>
                 <div className="login__buttons">
