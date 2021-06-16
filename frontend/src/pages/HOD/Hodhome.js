@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import {Button} from '@material-ui/core'
+import {useHistory} from 'react-router-dom'
 import ProgressIcon from '../../assets/progress.svg'
 import ReturnedIcon from '../../assets/returned.svg'
 import ApprovedIcon from '../../assets/approved.svg'
-import ApplyIcon from '../../assets/apply.svg'
-import DummyData from './HomeDummyData'
 import InProgress from '../InProgress/InProgress'
 import Returned from '../Returned/Returned'
 import Approved from '../Approved/Approved'
-import Apply from '../Apply/Apply'
 import Navbar from '../../components/Navbar'
 
 
@@ -16,29 +15,13 @@ export default function Home() {
     const [inProgress, setInProgress] = useState([])
     const [returned, setReturned] = useState([])
     const [approved, setApproved] = useState([])
-    const [active, setActive] = useState("progress")
+    const [active, setActive] = useState("recieve")
 
-    useEffect(() => {
-        const mydata=DummyData;
-        
-        var myProgress=[]
-        var myReturned=[]
-        var myApproved=[]
-        mydata.forEach(item=>
-        {
-            console.log(item)
-            if(item.inProgress)
-                myProgress.push(item)
-            if(item.returned)
-                myReturned.push(item)
-            if(item.approved)
-                myApproved.push(item)
-        })
-        setInProgress(myProgress)
-        setReturned(myReturned)
-        setApproved(myApproved)
-        console.log(mydata)
-    }, [DummyData])
+    const history=useHistory();
+    const addAdvisor = (e) =>{
+        e.preventDefault();
+        history.push('/addadvisor')
+    }
 
     return (
         <div className="flex flex-col text-black w-full items-center space-y-8">
@@ -46,18 +29,21 @@ export default function Home() {
                 
             <div className="pl-9 w-full text-left text-xl">Dashboard</div>
             <section className="flex flex-col space-y-8 w-11/12 items-center ">
-                <div className="text-lg text-left w-full">Welcome Peter</div>
+                <div className="flex items-center w-full justify-between">
+                <div className="text-lg text-left">Welcome HOD CSE</div>
+                <Button variant="contained" onClick={addAdvisor} style={{textTransform:'capitalize',outline:'none',backgroundColor:'#528CF8',color:'white',marginRight:'0.9em'}}>Add/View Staff Advisors</Button>
+                </div>
                 <section className="flex justify-between w-full  ">
                     <button 
-                        className={"mr-3 focus:outline-none category "+(active==="progress"?"dashboard-button-click":"dashboard-button ")}
-                        onClick={()=>{setActive("progress")}}>
+                        className={"mr-3 focus:outline-none category "+(active==="recieve"?"dashboard-button-click":"dashboard-button ")}
+                        onClick={()=>{setActive("recieve")}}>
                         <div className="flex w-full justify-end">
                             <img className="h-5 w-5 text-blue-500 focus:text-white" src={ProgressIcon} alt=""/>
                         </div>
                         
                         <div className="text-2xl font-bold">{inProgress.length}</div>
-                        <div className="text-lg font-semibold">In Progress</div>
-                        <div className={active==="progress"?"text-xs text-left visible":"text-xs text-left invisible"}>Details about the progress of certificates</div>
+                        <div className="text-lg font-semibold">Applications Recieved</div>
+                        <div className={active==="recieve"?"text-xs text-left visible":"text-xs text-left invisible"}>Total requests pending for approval</div>
                     </button>
 
                     <button 
@@ -82,21 +68,11 @@ export default function Home() {
                         <div className={active==="approved"?"text-xs text-left visible":"text-xs text-left invisible"}>Details of the certificate which are approved.</div>
                     </button>
 
-                    <button 
-                        className={"ml-3 focus:outline-none category "+(active==="apply"?"dashboard-button-click":"dashboard-button ")}
-                        onClick={()=>{setActive("apply")}}>
-                        <div className="flex w-full justify-end">
-                          <img className="h-5 w-5" src={ApplyIcon} alt=""/>
-                        </div>
-                        <div className="text-lg font-semibold pt-8 text-left">Submit New Application</div>
-                        <div className={active==="apply"?"text-xs text-left visible":"text-xs text-left invisible"}>Submit application for new certificate.</div>
-                    </button>
                 </section>
 
-                {(active==="progress")&&(<InProgress inProgress={inProgress}/>)}
+                {(active==="recieve")&&(<InProgress inProgress={inProgress}/>)}
                 {(active==="returned")&&(<Returned returned={returned}/>)}
                 {(active==="approved")&&(<Approved approved={approved}/>)}
-                {(active==="apply")&&(<Apply/>)} 
             </section>
         </div>
     )

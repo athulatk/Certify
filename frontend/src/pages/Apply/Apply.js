@@ -1,72 +1,22 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {Button,TextField} from '@material-ui/core'
 // import DownloadIcon from '../../assets/download.svg'
 
 export default function Apply({apply}) {
+    const[others,setOthers]=useState(false);
+    const[certType,setCertType]=useState("");
+    const[sub,setSub]=useState("");
 
-    // const renderData=(data, index)=>{
-    //     return(<div className="bg-white py-4 mx-3 rounded px-2 flex flex-row ring-2 ring-blue-500 shadow-xl items-center justify-between w-full my-2">
-
-    //         <section className="w-2/12 flex justify-center">
-    //         <div className="h-7 w-7 rounded-full flex items-center font-bold justify-center text-sm text-blue-500 bg-indigo-100">
-    //                <div>{index+1}</div>
-    //            </div>
-    //         </section>
-                
-    //         <section className="w-2/12 flex justify-center">
-    //             <div className="text-sm flex items-center justify-center ">
-    //                 <div>{data.name}</div>
-    //             </div>
-    //         </section>
-    //         <section className="w-2/12 flex justify-center text-md">
-    //             <div className="flex flex-col items-center">
-    //             <div className="text-xs">Certified Date:</div>
-    //                 <div className="text-sm flex items-center justify-center ">
-    //                     <div>{data.certifiedDate}</div>
-    //                 </div>
-
-                    
-    //             </div>
-    //         </section>
-
-
-
-    //         <section className="w-2/12 rounded-l-full flex justify-center text-md" >
-    //             <div className="flex flex-col items-center">
-    //             <div className="text-xs">Issued By:</div>
-
-    //                 <div className="text-sm flex items-center justify-center ">
-    //                     <div>
-    //                         {data.status}
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </section>
-            
-    //         <section className="w-2/12 flex justify-center">
-    //             <div className="text-sm flex items-center justify-center ">
-    //                 <div>{data.approvedRemark}</div>
-    //             </div>
-    //         </section>
-
-
-    //         <section className="w-2/12 flex justify-center">
-    //             <div className="text-sm flex items-center justify-center text-blue-500 cursor-pointer">
-    //                 <div>{data.scannedFile}</div>
-    //             </div>
-    //         </section>
-
-    //         <section className="w-2/12 flex justify-center">
-    //             <div className="h-7 w-7 cursor-pointer">
-    //                 <img src={DownloadIcon} alt=""/>
-    //             </div>
-    //         </section>
-            
-            
-
-            
-    //     </div>)
-    // }
+    const handleType = (e) =>{
+        setCertType(e.target.value);
+        console.log(certType)
+        if(e.target.value==="others"){
+            setOthers(true);
+        }
+        else{
+            setOthers(false);
+        }
+    }
 
     return (
         // <div className="w-full flex flex-col items-center mx-3 py-8">
@@ -78,15 +28,18 @@ export default function Apply({apply}) {
                 
                
                 <label for="certificate" className="text-sm pl-10">Select Certificate <span className="text-blue-500	">*</span></label>
-                <select name="certificate" className="ml-5 p-1 rounded-md border-blue-500" >
-                    <option value="volvo">Bonafide Certificate</option>
-                    <option value="volvo">Bonafide Certificate</option>
-                    <option value="volvo">Bonafide Certificate</option>
-                    <option value="volvo">Bonafide Certificate</option>
-                    <option value="volvo">Bonafide Certificate</option>
+                <select name="certificate" className="ml-5 p-1 rounded-md border-blue-500 outline-none" onChange={handleType}>
+                    <option value="bonafide">Bonafide Certificate</option>
+                    <option value="library">MCM Scholarship</option>
+                    <option value="tc">Transfer Certificate</option>
+                    <option value="hostel">E grantz scholarship</option>
+                    <option value="others">Others</option>
                 </select>
-                
-                {/*  */}
+                <br/>
+                {others?
+                <div>
+                <label className="text-sm pl-10">Please specify</label><span className="text-blue-500	">*</span>
+                <input className="ml-10 mt-6 p-1 rounded-md border-blue-500" type="text" size="60"/></div>:""}
             </section>
 
 
@@ -95,20 +48,19 @@ export default function Apply({apply}) {
                 
                
                 <label for="certificate" className="text-sm pl-10">Recipient <span className="text-blue-500	">*</span></label>
-                <select name="certificate" className="ml-5 p-1 rounded-md border-blue-500" >
-                    <option value="volvo">Bonafide Certificate</option>
-                    <option value="volvo">Bonafide Certificate</option>
-                    <option value="volvo">Bonafide Certificate</option>
-                    <option value="volvo">Bonafide Certificate</option>
-                    <option value="volvo">Bonafide Certificate</option>
+                <select name="certificate" className="ml-5 p-1 rounded-md border-blue-500" required>
+                    <option value="principal">Principal</option>
+                    <option value="ugdean">U.G Dean</option>
+                    <option value="pgdean">P.G Dean</option>
+                    <option value="hostel">Hostel Office</option>
+                    <option value="library">Library</option>
                 </select>
                 <br />
 
-
                 <label for="certificate" className="text-sm pl-10">Subject <span className="text-blue-500 pl-30">*</span></label>
-                <input className="ml-8 mt-5 border-blue-500	" type="text" size="60"  /><br />
+                <input className="ml-8 mt-5 border-blue-500	" value={sub} onChange={(e)=>setSub(e.target.value)}type="text" size="60" required/><br />
                 <label for="certificate" className="text-sm pl-10">Body <span className="text-blue-500 pl-30">*</span></label>
-                <textarea className="ml-12 mt-5 p-5 border-blue-500	" rows = "5" cols = "60" name = "description">
+                <textarea className="ml-12 mt-5 p-5 border-blue-500	outline-none " rows = "5" cols = "60" name = "description" required>
            
          </textarea><br />
 
@@ -133,7 +85,7 @@ export default function Apply({apply}) {
                 </div>
 
                 <label for="certificate" className="text-sm pl-10">Description <span className="text-xs text-blue-500 pl-30"> (Optional)</span></label>
-                <textarea className="ml-8 mt-5 p-5 border-blue-500	" rows = "3" cols = "50" name = "description">
+                <textarea className="ml-8 mt-5 p-5 border-blue-500 outline-none " rows = "3" cols = "50" name = "description">
             
          </textarea><br />
 

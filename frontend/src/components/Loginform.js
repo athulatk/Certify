@@ -3,9 +3,16 @@ import './Loginform.css'
 import {Button} from '@material-ui/core'
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import { useHistory } from 'react-router-dom';
 function Loginform() {
 
-    const [showPassword,setShowPassword]=useState(false)
+    const [showPassword,setShowPassword]=useState(false);
+    const history=useHistory();
+
+    const Login = (e) =>{
+        e.preventDefault();
+        history.push('/home')
+    }
     return (
         <div className="login__outerdiv">
             <div className="login__side">
@@ -34,7 +41,7 @@ function Loginform() {
                 </div>
                 <div className="login__buttons">
                 <Button style={{textTransform:'capitalize',backgroundColor:'white',color:'#4a86f7',border:'none'}}>Recover Password</Button>
-                <Button variant="contained" color="primary" style={{textTransform:'capitalize',backgroundColor:'#4a86f7'}}>Login</Button>
+                <Button variant="contained" color="primary" style={{textTransform:'capitalize',backgroundColor:'#4a86f7'}} onClick={Login}>Login</Button>
                 </div>
             </form>
         </div>
