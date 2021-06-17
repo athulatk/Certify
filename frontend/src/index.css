@@ -10,6 +10,7 @@
   
   .dashboard-button-click{
     background-image: linear-gradient(to top right, #528CF8, #FFFFFF);
+    /* background-image: linear-gradient(to left bottom, #4a86f7, #4a86f7, #649aff, #6398fa, #6197fc); */
     padding-left:3rem;
     @apply rounded-xl shadow-2xl flex flex-col w-1/3 text-white px-4 py-3;
   }

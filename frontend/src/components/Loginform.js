@@ -16,7 +16,7 @@ function Loginform() {
     return (
         <div className="login__outerdiv">
             <div className="login__side">
-            <h4>Welcome back!</h4>
+            <h4 className="text-lg font-bold">No more hustle for certificates!</h4>
             </div>
         <div className="login__div">
             <h2 style={{fontSize:'23px'}}>Login</h2>
@@ -26,8 +26,8 @@ function Loginform() {
             <form className="login__form">
                 <div className="login__inputs">
                 <div>
-                <label>UserId</label><br/>
-                <input type="text" size="30" placeholder="Enter userid"/>
+                <label>Email</label><br/>
+                <input type="email" size="30" placeholder="Enter Email"/>
                 </div>
                 <div>
                 <label>Password</label><br/>

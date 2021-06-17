@@ -52,7 +52,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function FormModal() {
+export default function FormModal({details,setDetails,setAdvisors}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -61,6 +61,16 @@ export default function FormModal() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleChange = (e) =>{
+    setDetails({...details,[e.target.name]:e.target.value})
+  }
+  const submitHandler = (e)=>{
+    e.preventDefault();
+    setAdvisors(prev=>[...prev,details])
+    setDetails({name:"",semester:"S1",email:"",password:""})
+
+  }
 
   return (
     <div>
@@ -72,19 +82,19 @@ export default function FormModal() {
                 backgroundColor:'#528CF8',
                 color:'white',
                 marginRight:'0.9em'}}>
-            <AddIcon/> Add Staff Advisor
+            <AddIcon style={{fontSize:20}}/> Add Staff Advisor
         </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle style={{backgroundColor:'#ECEFF4',textAlign:'center'}} id="customized-dialog-title" onClose={handleClose}>
           Add Staff Advisor
         </DialogTitle>
         <DialogContent style={{backgroundColor:'#ECEFF4'}}>
-            <form>
+            <form onSubmit={submitHandler}>
                 <label>Name<span className="text-blue-500 pl-30">*</span></label><br/>
-                <input className="border-blue-500" type="text" size="60" required/><br />
+                <input name="name" value={details.name} className="border-blue-500" type="text" size="60" required onChange={handleChange}/><br />
                 <div className="mt-5">
-                <label>Semester<span className="text-blue-500 pl-30 mt-10">*</span></label>
-                <select name="certificate" className="ml-3 p-1 rounded-md border-blue-500" required>
+                <label>Semester<span className="text-blue-500 pl-30">*</span></label>
+                <select name="semester" className="ml-3 p-1 rounded-md border-blue-500 outline-none" onChange={handleChange} required>
                     <option value="S1">S1</option>
                     <option value="S2">S2</option>
                     <option value="S3">S3</option>
@@ -96,17 +106,19 @@ export default function FormModal() {
                 </select>
                 </div>
                 <br />
-                <label>Email<span className="text-blue-500 pl-30 mt-10">*</span></label><br/>
-                <input className="border-blue-500" type="email" size="60" required/><br />
-                <label>Password<span className="text-blue-500 pl-30 mt-10">*</span></label><br/>
-                <input className="border-blue-500" type="password" size="60" required/><br />
+                <label>Email<span className="text-blue-500 pl-30">*</span></label><br/>
+                <input name="email" value={details.email} className="border-blue-500" type="email" size="60" required onChange={handleChange}/><br />
+                <div className="mt-4">
+                <label>Password<span className="text-blue-500 pl-30">*</span></label><br/>
+                </div>
+                <input name="password" value={details.password} className="border-blue-500" type="password" size="60" required onChange={handleChange}/><br />
                 <div className="flex w-full items-center justify-center">
-                <Button style={{
+                <Button type="submit" style={{
                 textTransform:'capitalize',
                 outline:'none',
                 backgroundColor:'#528CF8',
                 color:'white',
-                marginTop:'0.9em'}} onClick={handleClose}><AddIcon/> Add</Button>
+                marginTop:'0.9em'}} onClick={handleClose}><AddIcon style={{fontSize:17}}/> Add account</Button>
                 </div>
             </form>
         </DialogContent>
