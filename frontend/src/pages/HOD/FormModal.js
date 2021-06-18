@@ -69,6 +69,7 @@ export default function FormModal({details,setDetails,setAdvisors}) {
     e.preventDefault();
     setAdvisors(prev=>[...prev,details])
     setDetails({name:"",semester:"S1",email:"",password:""})
+    handleClose();
 
   }
 
@@ -118,7 +119,7 @@ export default function FormModal({details,setDetails,setAdvisors}) {
                 outline:'none',
                 backgroundColor:'#528CF8',
                 color:'white',
-                marginTop:'0.9em'}} onClick={handleClose}><AddIcon style={{fontSize:17}}/> Add account</Button>
+                marginTop:'0.9em'}}><AddIcon style={{fontSize:17}}/> Add account</Button>
                 </div>
             </form>
         </DialogContent>

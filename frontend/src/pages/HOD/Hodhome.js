@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom'
 import ProgressIcon from '../../assets/progress.svg'
 import ReturnedIcon from '../../assets/returned.svg'
 import ApprovedIcon from '../../assets/approved.svg'
-import InProgress from '../InProgress/InProgress'
+import Recieved from './Recieved'
 import Returned from '../Returned/Returned'
 import Approved from '../Approved/Approved'
 import Navbar from '../../components/Navbar'
@@ -12,7 +12,13 @@ import Navbar from '../../components/Navbar'
 
 export default function Home() {
 
-    const [inProgress, setInProgress] = useState([])
+    const [recieved, setRecieved] = useState([{
+        name:"N Athul Kumar",
+        semester:"S6",
+        certificate:'Bonafide Certificate',
+        department:"CSE",
+        appno:'16'
+    }])
     const [returned, setReturned] = useState([])
     const [approved, setApproved] = useState([])
     const [active, setActive] = useState("recieve")
@@ -41,7 +47,7 @@ export default function Home() {
                             <img className="h-5 w-5 text-blue-500 focus:text-white" src={ProgressIcon} alt=""/>
                         </div>
                         
-                        <div className="text-2xl font-bold">{inProgress.length}</div>
+                        <div className="text-2xl font-bold">{recieved.length}</div>
                         <div className="text-lg font-semibold">Applications Recieved</div>
                         <div className={active==="recieve"?"text-xs text-left visible":"text-xs text-left invisible"}>Total requests pending for approval</div>
                     </button>
@@ -70,7 +76,7 @@ export default function Home() {
 
                 </section>
 
-                {(active==="recieve")&&(<InProgress inProgress={inProgress}/>)}
+                {(active==="recieve")&&(<Recieved recieved={recieved}/>)}
                 {(active==="returned")&&(<Returned returned={returned}/>)}
                 {(active==="approved")&&(<Approved approved={approved}/>)}
             </section>

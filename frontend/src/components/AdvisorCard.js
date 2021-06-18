@@ -22,5 +22,4 @@ function AdvisorCard({name,email,semester,index}) {
         </div>
     )
 }
-
 export default AdvisorCard
