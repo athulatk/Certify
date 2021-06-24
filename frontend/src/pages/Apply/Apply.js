@@ -1,11 +1,33 @@
 import React,{useState} from 'react'
 import {Button,TextField} from '@material-ui/core'
+import axios from 'axios'
 // import DownloadIcon from '../../assets/download.svg'
 
 export default function Apply({apply}) {
     const[others,setOthers]=useState(false);
-    const[certType,setCertType]=useState("");
+    const[certType,setCertType]=useState("Bonafide Certificate");
+    const [recipent, setRecipent] = useState("Principal")
+    const [body, setBody] = useState(null)
     const[sub,setSub]=useState("");
+
+
+    const applyCall=()=>{
+        axios.get(
+            'http://localhost:8080/apply',
+            {
+                params : {
+                    category:certType,
+                    recipent:recipent,
+                    letter:body
+                }
+            }
+        ).then(res=>{
+            if(res.status===200)
+            {
+                console.log(res)
+            }
+        }).catch(err=>{console.log(err)})
+    }
 
     const handleType = (e) =>{
         setCertType(e.target.value);
@@ -48,7 +70,7 @@ export default function Apply({apply}) {
                 
                
                 <label for="certificate" className="text-sm pl-10">Recipient <span className="text-blue-500	">*</span></label>
-                <select name="certificate" className="ml-5 p-1 rounded-md border-blue-500" required>
+                <select name="certificate" className="ml-5 p-1 rounded-md border-blue-500" required onChange={e=>{setRecipent(e.target.value)}}>
                     <option value="principal">Principal</option>
                     <option value="ugdean">U.G Dean</option>
                     <option value="pgdean">P.G Dean</option>
@@ -60,14 +82,9 @@ export default function Apply({apply}) {
                 <label for="certificate" className="text-sm pl-10">Subject <span className="text-blue-500 pl-30">*</span></label>
                 <input className="ml-8 mt-5 border-blue-500	" value={sub} onChange={(e)=>setSub(e.target.value)}type="text" size="60" required/><br />
                 <label for="certificate" className="text-sm pl-10">Body <span className="text-blue-500 pl-30">*</span></label>
-                <textarea className="ml-12 mt-5 p-5 border-blue-500	outline-none " rows = "5" cols = "60" name = "description" required>
-           
-         </textarea><br />
+                <textarea className="ml-12 mt-5 p-5 border-blue-500	outline-none " rows = "5" cols = "60" name = "description" onChange={e=>{setBody(e.target.value)}} required>
+                </textarea><br />
 
-
-
-
-                
                 {/*  */}
             </section>
 
@@ -99,7 +116,7 @@ export default function Apply({apply}) {
             <section >
                 <div className="  flex 	justify-end	mt-5 mb-5">
                     <Button  style={{textTransform:'capitalize',backgroundColor:'white',color:'#4a86f7',border:'none',margin:'5px'}}>Save Changes</Button>
-                    <Button  variant="contained" color="primary" style={{textTransform:'capitalize',backgroundColor:'#4a86f7',margin:'10px'}}>Submit</Button>
+                    <Button  variant="contained" color="primary" style={{textTransform:'capitalize',backgroundColor:'#4a86f7',margin:'10px'}} onClick={()=>{applyCall()}}>Submit</Button>
                 </div>
             </section>
 
