@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/certify', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://certify:webtech123@cluster0.aq7ck.mongodb.net/certify?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 const { Schema } = mongoose;
 
@@ -25,14 +25,14 @@ const applicationSchema=new Schema({
 }, {collection: 'application'})
 
 
-const studentUserSchema=new Schema({
-  email: String,
-  password: String,
-  ktuId: String
-}, {collection: 'studentUser'})
+// const studentUserSchema=new Schema({
+//   email: String,
+//   password: String,
+//   ktuId: String
+// }, {collection: 'studentUser'})
 
 application = mongoose.model('application', applicationSchema);
-studentUser = mongoose.model('studentUser', studentUserSchema);
+// studentUser = mongoose.model('studentUser', studentUserSchema);
 
 exports.application=application
-exports.studentUser=studentUser
+// exports.studentUser=studentUser

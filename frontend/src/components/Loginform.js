@@ -39,7 +39,7 @@ function Loginform(props) {
     return (
         <div className="login__outerdiv">
             <div className="login__side">
-            <h4 className="text-lg font-bold">No more hustle for certificates!</h4>
+            <h4 className="text-lg font-bold">No more hassle for certificates!</h4>
             </div>
         <div className="login__div">
             <h2 style={{fontSize:'23px'}}>Login</h2>
