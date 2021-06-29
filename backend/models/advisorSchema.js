@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 const advisoruserSchema = new Schema({
     batchId:{
         type: Schema.Types.ObjectId,
+        ref:"batch",
         required:true
     },
     name:{

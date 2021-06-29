@@ -10,6 +10,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 import Close from '../../assets/close.svg'
+import axios from 'axios'
+import {baseUrl} from '../../baseUrl'
 
 const styles = (theme) => ({
   root: {
@@ -67,7 +69,20 @@ export default function FormModal({details,setDetails,setAdvisors}) {
   }
   const submitHandler = (e)=>{
     e.preventDefault();
-    setAdvisors(prev=>[...prev,details])
+    setAdvisors(prev=>[...prev,{...details,batchId:{semester:details.semester}}])
+    axios.post(`${baseUrl}/hod/advisor/register`,{
+      name:details.name,
+      semester:details.semester,
+      department:'CSE',
+      email:details.email,
+      password:details.password
+    })
+    .then((res)=>{
+      console.log(res)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
     setDetails({name:"",semester:"S1",email:"",password:""})
     handleClose();
 

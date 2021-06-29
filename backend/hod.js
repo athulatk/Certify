@@ -86,3 +86,19 @@ exports.advisorRegister= async (req,res)=>{
     } 
         
 }
+
+exports.getAdvisors=(req,res)=>{
+    var batches=[];
+    batch.find({department:"CSE"},function(err,docs){
+        if(docs.length!=0){
+            docs.forEach((item)=>{
+                batches.push(item._id)
+            })
+        }
+    advisorUser.find({batchId:batches})
+    .populate('batchId','semester')
+    .then((docs)=>{
+        return res.send(docs)
+    })
+    })
+}

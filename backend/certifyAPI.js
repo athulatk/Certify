@@ -46,6 +46,7 @@ app.get('/advisor/approve', (req, res)=>advisor.approveApplication(req, res))
 
 //hod routes
 app.post('/hod/advisor/register', (req, res)=>hod.advisorRegister(req, res))
+app.get('/hod/staffadvisors',(req,res)=>hod.getAdvisors(req,res))
 
 function checkAuthenticated(req, res, next){
     console.log("im heeree")
