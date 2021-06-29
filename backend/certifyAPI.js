@@ -23,19 +23,29 @@ app.use(passport.session());
 app.use(cors());
 app.use(express.json());
 
-const application=require('./application');
+const advisor= require('./advisor');
+const hod= require('./hod')
 const student = require('./student');
 
 //student routes
-app.get('/apply',(req,res)=>application.apply(req,res));
-app.post('/student/login', passport.authenticate('studentLocal'), (req,res)=>student.studentLogin(req,res))
-app.post('/student/register', (req,res)=>student.studentRegister(req,res))
-
-app.get('/checkAuthenticated', checkAuthenticated, (req,res)=>{
+app.get('/student/apply',(req, res)=>student.apply(req, res));
+app.post('/student/editApplication', (req, res)=>student.editApplication(req, res))
+app.post('/student/login', passport.authenticate('studentLocal'), (req, res)=>student.studentLogin(req, res))
+app.get('/checkAuthenticated', checkAuthenticated, (req, res)=>{
     // console.log("heeree")
     req.user.password=null
     res.send(req.user)
 })
+
+//staff advisor routes
+app.post('/advisor/login', passport.authenticate('advisorLocal'), (req, res)=>advisor.advisorLogin(req, res))
+app.post('/advisor/student/register', (req, res)=>advisor.studentRegister(req, res))
+app.get('/advisor/return', (req, res)=>advisor.returnApplication(req, res))
+app.get('/advisor/application', (req, res)=>advisor.applications(req, res))
+app.get('/advisor/approve', (req, res)=>advisor.approveApplication(req, res))
+
+//hod routes
+app.post('/hod/advisor/register', (req, res)=>hod.advisorRegister(req, res))
 
 function checkAuthenticated(req, res, next){
     console.log("im heeree")

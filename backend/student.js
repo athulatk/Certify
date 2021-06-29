@@ -1,34 +1,49 @@
-const studentUser=require('./models/studentuserSchema')
+const {studentUser}=require('./models/studentuserSchema')
 const bcrypt=require('bcrypt')
 
-// exports.studentRegister=async (req,res)=>{
-//     var hashedPass=await bcrypt.hash(req.body.password, 10)
-//     console.log("pass : ",hashedPass)
-//     // console.log("reques : ",req)
-//     // var data={
-//     //     ...req.query,
-//     //     date:today,
-//     //     status:"Staff Advisor",
-//     //     returned:false,
-//     //     approved:false,
-//     //     feedback:null,
-//     // }
-//     var data={
-//         ...req.body,
-//         password:hashedPass
-//     };
+var {application}=require('./models/applicationSchema')
 
-//     // var student=new studentUser(data);
-    
-//     console.log("req.body : ",req.body)
-    
-//     studentUser.create(data, function (err, small) {
-//         if (err) return handleError(err);
-//         console.log(small)
-//         res.status(200).send("success")
-//         // saved!
-//     });
-// }
+exports.apply=(req,res)=>{
+    var today = new Date().toISOString().slice(0, 10)
+    // console.log("reques : ",req)
+    var data={
+        ...req.query,
+        date:today,
+        status:"Staff Advisor",
+        returned:false,
+        approved:false,
+        feedback:null,
+    }
+
+    application.create(data, function (err, small) {
+        if (err) return handleError(err);
+        console.log(small)
+        // saved!
+    });
+}
+
+exports.editApplication=(req, res)=>{
+    var today = new Date().toISOString().slice(0, 10)
+    // console.log("reques : ",req)
+    var data={
+        ...req.query,
+        date:today,
+        status:"Staff Advisor",
+        returned:false,
+        approved:false,
+        feedback:null,
+    }
+
+    application.updateOne({_id:data._id},{...data},(err,log)=>{
+        console.log("Number of Records Effected"+log);
+        res.status(200).send("success")
+    })
+}
+
+exports.studentLogin=(req, res) => {
+    req.user.password=null
+    res.send(req.user)
+}
 
 exports.studentRegister= async (req,res)=>{
     for(var i=0;i<req.body.length;i++){
@@ -38,8 +53,7 @@ exports.studentRegister= async (req,res)=>{
 
             var user=new studentUser({
                 ...req.body[i],
-                batchid:123,
-                logincount:0
+                loginCount:0
             })
             user.save()
         }
@@ -51,9 +65,5 @@ exports.studentRegister= async (req,res)=>{
         
 }
 
-exports.studentLogin=(req, res) => {
-    req.user.password=null
-    res.send(req.user)
-}
 
 

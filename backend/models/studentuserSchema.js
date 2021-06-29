@@ -1,43 +1,53 @@
-const mongoose=require('mongoose');
-const studentuserSchema = new mongoose.Schema({
-    Name:{
+const {mongoose}=require('../server');
+
+const { Schema } = mongoose;
+
+const studentuserSchema = new Schema({
+    batchId:{
+        type: Schema.Types.ObjectId,
+        required:true
+    },
+    name:{
         type:String,
         required:true
     },
-    Email:{
+    email:{
         type:String,
         required:true
     },
-    Password:{
+    password:{
         type:String,
         required:true
     },
-    KtuId:{
+    ktuId:{
         type:String,
         required:true
     },
-    Admissionno:{
+    admissionNo:{
         type:String,
         required:true
     },
-    Department:{
+    department:{
         type:String,
         required:true
     },
-    Semester:{
+    semester:{
         type:String,
         required:true
     },
-    Phone:{
+    phone:{
         type:String,
         required:true
     },
-    BatchId:{
+    batchId:{
         type:String
+        // required:true
     } ,
-    Logincount:{
-        type:Number
+    loginCount:{
+        type:Number,
+        required:true
     }  
 })
 
-module.exports=mongoose.model("studentUser",studentuserSchema)
+const studentUser = mongoose.model("studentUser",studentuserSchema)
+exports.studentUser=studentUser

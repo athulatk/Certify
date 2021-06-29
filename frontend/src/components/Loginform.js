@@ -24,7 +24,7 @@ function Loginform(props) {
 
     const Login = (e) =>{
         e.preventDefault();
-        axios.post('http://localhost:8080/studentLogin',
+        axios.post('http://localhost:8080/student/login',
             {
                 email:email,
                 password:password

@@ -1,5 +1,6 @@
 const LocalStrategy=require('passport-local').Strategy
-const {studentUser}=require('./server')
+const {studentUser}=require('./models/studentuserSchema')
+const {advisorUser}=require('./models/advisorSchema')
 const bcrypt=require('bcrypt')
 
 const initializePassport=(passport)=>{
@@ -14,7 +15,14 @@ const initializePassport=(passport)=>{
                 return done(null, false, {message: 'No student user with this email'})
             }
             try{
+
+                console.log(email, " ", password )
                 if(await bcrypt.compare(password,user.password)){
+                    if(user.loginCount!=undefined)
+                    {
+                        console.log("count : ",user.loginCount)
+                        User.findOneAndUpdate({email:email}, {$inc:{loginCount:1}}).exec()
+                    }
                     return done(null, user)
                 }
                 else
@@ -29,6 +37,7 @@ const initializePassport=(passport)=>{
     }
 
     passport.use('studentLocal',new LocalStrategy({usernameField:'email'}, authenticateUser(studentUser)));
+    passport.use('advisorLocal',new LocalStrategy({usernameField:'email'}, authenticateUser(advisorUser)));
 
     passport.serializeUser(function(user, done) {
         done(null, user.email);

@@ -13,7 +13,7 @@ export default function Apply({apply}) {
 
     const applyCall=()=>{
         axios.get(
-            'http://localhost:8080/apply',
+            'http://localhost:8080/student/apply',
             {
                 params : {
                     category:certType,
