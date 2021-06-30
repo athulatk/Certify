@@ -3,7 +3,6 @@
     flex-direction:column;
     justify-content:center;
     margin-top: 0.8em;
-    transition: 0.3s ease;
 }
 .login__div{
     width: 700px;
@@ -13,7 +12,6 @@
     border-radius:0 10px 10px 0;
     padding: 2em;
     background-color: white;  
-    transition: 0.3s ease;  
 }
 .login__div>h3{
     margin-bottom: 1em;    
@@ -54,12 +52,16 @@ input{
     border-radius: 5px;
     
 } 
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1em;
+    margin-bottom: 0.2em;
+}
 .login__buttons{
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    margin-top:1em;
-    margin-bottom: 0.2em;
 }
 .login__buttons>button{
     margin-left:20px;

@@ -32,7 +32,7 @@ function AdvisorPage() {
         <div className="flex flex-col text-black w-full items-center space-y-8">
             <Navbar/>
             {loading?<CircularProgress style={{position:'absolute',top:'30%'}}/>:
-            advisors.length==0?
+            advisors.length===0?
             <div className="flex flex-col items-center justify-center">
             <img src={Team} alt="" style={{width:'350px',marginRight:'0.5em'}}/>
             <p className="mt-10 mb-8">No staff advisors are added.</p>

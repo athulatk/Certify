@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import {Button} from '@material-ui/core'
-import {useHistory} from 'react-router-dom'
 import PublishIcon from '@material-ui/icons/Publish';
 import ProgressIcon from '../../assets/progress.svg'
 import ReturnedIcon from '../../assets/returned.svg'
@@ -30,7 +29,7 @@ export default function AdvisorHome() {
     const [studentData,setStudentData]=useState([])
 
     useEffect(() => {
-        if(studentData.length!=0){
+        if(studentData.length!==0){
             axios.post('http://localhost:8080/student/register',studentData)
             .then(res=>{
                 console.log(res);

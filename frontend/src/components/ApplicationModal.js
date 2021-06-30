@@ -34,7 +34,7 @@ const DialogTitle = withStyles(styles)((props) => {
       <Typography variant="h6">{children}</Typography>
       {onClose ? (
         <IconButton aria-label="close" className={classes.closeButton} onClick={onClose} style={{width:'80px',outline:'none'}}>
-          <img src={Close} style={{outline:'none'}}/>
+          <img alt="close" src={Close} style={{outline:'none'}}/>
         </IconButton>
       ) : null}
     </MuiDialogTitle>

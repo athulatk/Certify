@@ -4,7 +4,7 @@ import {Button} from '@material-ui/core'
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { useHistory } from 'react-router-dom';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import axios from 'axios';
 function Loginform(props) {
 
@@ -12,7 +12,6 @@ function Loginform(props) {
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
     const [loginType,setLoginType]=useState("")
-    const [confirmLogin,setConfirmLogin]=useState("")
     const history=useHistory();
 
     useEffect(() => {
@@ -40,7 +39,7 @@ function Loginform(props) {
         })
     }
     return (
-        <div className="login__outerdiv">
+        <div className="login__outerdiv" style={loginType?{height:'320px'}:{height:'190px'}}>
             <div className="login__side">
             <h4 className="text-lg font-bold">No more hassle for certificates!</h4>
             </div>
@@ -79,10 +78,15 @@ function Loginform(props) {
                          </div>
                      </div>
                  </div>
- 
+                <div className="buttons">
+                    <Button style={{textTransform:'capitalize',backgroundColor:'white',color:'#4a86f7',border:'none',marginLeft:'0'}}
+                     onClick={()=>setLoginType("")}>
+                    <ArrowBackIosIcon style={{fontSize:'18px'}}/> Back</Button>
+
                  <div className="login__buttons">
                      <Button style={{textTransform:'capitalize',backgroundColor:'white',color:'#4a86f7',border:'none'}}>Recover Password</Button>
                      <Button variant="contained" color="primary" style={{textTransform:'capitalize',backgroundColor:'#4a86f7'}} onClick={Login}>Login</Button>
+                 </div>
                  </div>
              </form>
              </div>
@@ -99,9 +103,9 @@ function Loginform(props) {
                      <option value="Principal">Principal</option>
                      <option value="U.G Dean">U.G Dean</option>
                  </select>
-                 <div className="login__buttons">
+                 {/* <div className="login__buttons">
                      <Button variant="contained" color="primary" style={{textTransform:'capitalize',backgroundColor:'#4a86f7'}}><ArrowForwardIosIcon style={{fontSize:'18px'}} onClick={()=>setConfirmLogin(loginType)}/> Next</Button>
-                 </div>
+                 </div> */}
              </div>
              
              
