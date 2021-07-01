@@ -26,6 +26,7 @@ app.use(express.json());
 const advisor= require('./advisor');
 const hod= require('./hod')
 const student = require('./student');
+const admin=require('./admin');
 
 //student routes
 app.get('/student/apply',(req, res)=>student.apply(req, res));
@@ -47,6 +48,10 @@ app.get('/advisor/approve', (req, res)=>advisor.approveApplication(req, res))
 //hod routes
 app.post('/hod/advisor/register', (req, res)=>hod.advisorRegister(req, res))
 app.get('/hod/staffadvisors',(req,res)=>hod.getAdvisors(req,res))
+
+//admin routes
+app.post('/admin/hod/register',(req,res)=>admin.hodregister(req,res))
+app.post('/admin/authority/register',(req,res)=>admin.authorityregister(req,res))
 
 function checkAuthenticated(req, res, next){
     console.log("im heeree")
