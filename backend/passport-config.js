@@ -47,6 +47,7 @@ const initializePassport=(passport)=>{
         // User.findById(id, function(err, user) {
         //     done(err, user);
         // });
+        // console.log("i hv been called")
         studentUser.findOne({email:email}, (err,user)=>{
             done(err,user);
         })

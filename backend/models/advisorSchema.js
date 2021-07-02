@@ -20,10 +20,10 @@ const advisoruserSchema = new Schema({
         type:String,
         required:true
     },  
-    noApplications:{
-        type:Number,
-        required:true
-    },  
+    // noApplications:{
+    //     type:Number,
+    //     required:true
+    // },  
 })
 
 const advisorUser = mongoose.model("advisorUser",advisoruserSchema)

@@ -1,7 +1,9 @@
 const {studentUser}=require('./models/studentuserSchema')
-const bcrypt=require('bcrypt')
+const {advisorUser}= require('./models/advisorSchema')
+const {batch}=require('./models/batchSchema')
+const {application}=require('./models/applicationSchema')
 
-var {application}=require('./models/applicationSchema')
+const bcrypt=require('bcrypt')
 
 exports.apply=(req,res)=>{
     var today = new Date().toISOString().slice(0, 10)
@@ -42,6 +44,8 @@ exports.editApplication=(req, res)=>{
 
 exports.studentLogin=(req, res) => {
     req.user.password=null
+    
+    console.log("final user: ", req.user);
     res.send(req.user)
 }
 
