@@ -13,9 +13,7 @@ function Login() {
     const [user, setUser] = useState(null)
 
     return (
-        loggedIn
-        ?(<Home userData={user}/>)
-        :(<div className="login_page">
+        <div className="login_page">
             <img src={Back} alt="" id="objects"/>
             <img src={Topcorner} alt="" id="topcorner"/>
             <img src={Bottomcorner} alt="" id="bottomcorner"/>
@@ -23,7 +21,7 @@ function Login() {
             <img src={Logo} alt="" id="logo"/>
             <Loginform setLoggedIn={setLoggedIn} setUser={setUser}/>
             </div>
-        </div>)
+        </div>
     )
 }
 

@@ -10,6 +10,7 @@ import Approved from '../Approved/Approved'
 import Apply from '../Apply/Apply'
 import Navbar from '../../components/Navbar'
 import Profile from '../../components/Profile'
+import { useLocation } from 'react-router-dom'
 
 export default function Home({userData}) {
 
@@ -18,7 +19,7 @@ export default function Home({userData}) {
     const [approved, setApproved] = useState([])
     const [active, setActive] = useState("progress")
     const [modalActive, setModalActive] = useState(false)
-
+    const location=useLocation();
     useEffect(() => {
         console.log(userData)
         const mydata=DummyData;
@@ -55,7 +56,7 @@ export default function Home({userData}) {
                 //             "preethi"
                 //         ]}
                 //     } 
-                user={userData}
+                user={location.state.user}
                 modalActive={modalActive}
                 setModalActive={setModalActive}
             />

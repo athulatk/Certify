@@ -34,9 +34,9 @@ function Loginform(props) {
             }
         ).then(res=>{
             console.log(res.data)
-            props.setUser(res.data)
-            props.setLoggedIn(true)
-            // history.push('/home')
+            // props.setUser(res.data)
+            // props.setLoggedIn(true)
+            history.push({pathname:'/home',state:{user:res.data}})
         }).catch(error=>{
             console.log(error)
         })
