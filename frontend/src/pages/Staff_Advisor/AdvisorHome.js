@@ -38,7 +38,7 @@ export default function AdvisorHome(props) {
                 studentData:studentData
             }
 
-            axios.post('http://localhost:8080/student/register',studentRegisterObj)
+            axios.post('http://localhost:8080/advisor/student/register',studentRegisterObj)
             .then(res=>{
                 console.log(res);
             })
@@ -104,7 +104,7 @@ export default function AdvisorHome(props) {
             <div className="pl-9 w-full text-left text-xl">Dashboard</div>
             <section className="flex flex-col space-y-8 w-11/12 items-center ">
                 <div className="flex items-center w-full justify-between">
-                <div className="text-lg text-left">Welcome Staff Advisor</div>
+                <div className="text-lg text-left">Welcome {location.state.user.name}</div>
                 <div>
                 <input
                     accept=".xlsx"

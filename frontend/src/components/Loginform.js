@@ -27,7 +27,7 @@ function Loginform(props) {
 
     const Login = (e) =>{
         e.preventDefault();
-        axios.post('http://localhost:8080/student/login',
+        axios.post(`http://localhost:8080/${loginType}/login`,
             {
                 email:email,
                 password:password
@@ -44,7 +44,7 @@ function Loginform(props) {
             console.log(res.data)
             // props.setUser(res.data)
             // props.setLoggedIn(true)
-            history.push({pathname:'/home',state:{user:res.data}})
+            history.push({pathname:`/${loginType}/home`,state:{user:res.data}})
         }).catch(error=>{
             console.log(error)
         })
@@ -108,11 +108,11 @@ function Loginform(props) {
              <h2 style={{fontSize:'23px'}}>Login as:</h2>
              <select name="certificate" className="ml-5 mt-6 p-1 w-4/12 rounded-md border-blue-500" required onChange={(e)=>setLoginType(e.target.value)}>
                      <option value="">Select role</option> 
-                     <option value="Student">Student</option>
-                     <option value="Staff Advisor">Staff Advisor</option>
-                     <option value="HOD">HOD</option>
-                     <option value="Principal">Principal</option>
-                     <option value="U.G Dean">U.G Dean</option>
+                     <option value="student">Student</option>
+                     <option value="advisor">Staff Advisor</option>
+                     <option value="hod">HOD</option>
+                     <option value="principal">Principal</option>
+                     <option value="dean">U.G Dean</option>
                  </select>
                  {/* <div className="login__buttons">
                      <Button variant="contained" color="primary" style={{textTransform:'capitalize',backgroundColor:'#4a86f7'}}><ArrowForwardIosIcon style={{fontSize:'18px'}} onClick={()=>setConfirmLogin(loginType)}/> Next</Button>

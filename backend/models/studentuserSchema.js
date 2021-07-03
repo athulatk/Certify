@@ -40,7 +40,7 @@ const studentuserSchema = new Schema({
         required:true
     },
     batchId:{
-        type:String
+        type:Schema.Types.ObjectId
         // required:true
     } ,
     loginCount:{
