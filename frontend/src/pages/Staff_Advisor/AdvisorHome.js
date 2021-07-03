@@ -30,6 +30,12 @@ export default function AdvisorHome(props) {
 
     useEffect(() => {
         if(studentData.length!==0){
+
+            studentRegisterObj={
+                advisorUser:props.user, 
+                studentData:studentData
+            }
+
             axios.post('http://localhost:8080/student/register',studentData)
             .then(res=>{
                 console.log(res);
