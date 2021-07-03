@@ -12,7 +12,7 @@ import XLSX from 'xlsx'
 import axios from 'axios'
 
 
-export default function AdvisorHome() {
+export default function AdvisorHome(props) {
 
     const [recieved, setRecieved] = useState([{
         name:"N Athul Kumar",
@@ -39,10 +39,6 @@ export default function AdvisorHome() {
             })}
     }, [studentData])
         
-        
- 
-
-
     const fileUpload=(e)=>{
         const uploadedfile=e.target.files[0];
         console.log(e.target.files[0])
@@ -54,41 +50,42 @@ export default function AdvisorHome() {
                 const bstr = e.target.result;
                 const workbook = XLSX.read(bstr, { type: "binary" });
                 var worksheet = workbook.Sheets['Sheet1'];
-    //getting the complete sheet
-    // console.log(worksheet);
+                
+                //getting the complete sheet
+                // console.log(worksheet);
   
-    var headers = {};
-    var data = [];
-    for (var z in worksheet) {
-      if (z[0] === "!") continue;
-      //parse out the column, row, and value
-      var col = z.substring(0, 1);
-      // console.log(col);
-  
-      var row = parseInt(z.substring(1));
-      // console.log(row);
-  
-      var value = worksheet[z].v;
-      // console.log(value);
-  
-      //store header names
-      if (row == 1) {
-        headers[col] = value;
-        // storing the header names
-        continue;
-      }
-  
-      if (!data[row]) data[row] = {};
-      data[row][headers[col]] = value;
-    }
-    //drop those first two rows which are empty
-    data.shift();
-    data.shift();
-    console.log(data);
-    setStudentData(data)       
-    }
-    reader.readAsBinaryString(uploadedfile);
-    }
+                var headers = {};
+                var data = [];
+                for (var z in worksheet) {
+                    if (z[0] === "!") continue;
+                    //parse out the column, row, and value
+                    var col = z.substring(0, 1);
+                    // console.log(col);
+                
+                    var row = parseInt(z.substring(1));
+                    // console.log(row);
+                
+                    var value = worksheet[z].v;
+                    // console.log(value);
+                
+                    //store header names
+                    if (row == 1) {
+                        headers[col] = value;
+                        // storing the header names
+                        continue;
+                    }
+                
+                    if (!data[row]) data[row] = {};
+                    data[row][headers[col]] = value;
+                }
+                //drop those first two rows which are empty
+                data.shift();
+                data.shift();
+                console.log(data);
+                setStudentData(data)       
+            }
+            reader.readAsBinaryString(uploadedfile);
+        }
 
     }
 
