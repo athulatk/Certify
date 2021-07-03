@@ -33,7 +33,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Configuring express server
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json());
 
 const advisor= require('./advisor');
