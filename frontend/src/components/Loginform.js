@@ -15,8 +15,8 @@ function Loginform(props) {
     const history=useHistory();
 
     useEffect(() => {
-        axios.defaults.withCredentials = true;
-        axios.get('http://localhost:8080/checkAuthenticated',{withCredentials: true})
+        // axios.defaults.withCredentials = true;
+        axios.get('http://localhost:8080/checkAuthenticated',{withCredentials: false})
         .then(res=>{
             console.log(res.data)
             history.push('/home')
@@ -31,19 +31,12 @@ function Loginform(props) {
             {
                 email:email,
                 password:password
-             
-                // body:{
-                //     email:email,
-                //     password:password
-                // },
-                // headers:{
-                //     'Content-Type': 'application/json;charset=UTF-8',
-                //     "Access-Control-Allow-Origin": "*"
-                // }
             }
         ).then(res=>{
             console.log(res.data)
-            history.push('/home')
+            props.setUser(res.data)
+            props.setLoggedIn(true)
+            // history.push('/home')
         }).catch(error=>{
             console.log(error)
         })

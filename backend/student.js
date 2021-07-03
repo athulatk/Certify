@@ -45,7 +45,7 @@ exports.editApplication=(req, res)=>{
 exports.studentLogin=(req, res) => {
     req.user.password=null
     
-    console.log("final user: ", req.user);
+    // console.log("final user: ", req.user);
     res.send(req.user)
 }
 

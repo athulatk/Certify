@@ -1,21 +1,34 @@
 const express = require('express');
 const cors = require('cors');
-const passport=require('passport')
+
+const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 
 const {initializePassport}=require('./passport-config')
-initializePassport(passport)
+
+const passport=initializePassport()
 
 var app = express();
 
-app.use(cookieParser());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+// app.use(cookieParser());
+
+app.use(
+	bodyParser.urlencoded({
+		extended: false
+	})
+)
+
+app.use(bodyParser.json())
+
 app.use(session({
     // secret: process.env.SESSION_SECRET,
     secret: 'secretkey',
     resave: false,
     saveUninitialized: false
 }))
+
 app.use(passport.initialize());
 app.use(passport.session());
 
