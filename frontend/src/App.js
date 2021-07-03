@@ -9,6 +9,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import Adminpanel from './pages/AdminPanel/Adminpanel';
 function App() {
   return (
     <div className="App">
@@ -26,9 +27,13 @@ function App() {
         <Route path="/addadvisor">
           <AdvisorPage/>
         </Route>
+        <Route path="/adminpanel">
+        <Adminpanel/>
+        </Route>
         <Route path="">
         <Login/>
         </Route>
+        
         </Switch>
      </Router>
     </div>
