@@ -11,7 +11,12 @@ exports.hodregister=async(req,res)=>{
         })
         hod.save()
         .then(()=>{
-            return res.send("Success");
+            hodUser.find({},(err,log)=>{
+                if (err) 
+                    return res.send(err);
+                return res.send(log);
+            })
+            
         })
         .catch((err)=>{
             console.error(err);
@@ -21,6 +26,13 @@ exports.hodregister=async(req,res)=>{
         res.status(500).send()
     }
 
+}
+
+exports.displayhods=(req,res)=>{
+    hodUser.find({})
+    .then(data=>{
+        return res.send(data);
+    })
 }
 
 exports.authorityregister=async(req,res)=>{

@@ -64,6 +64,7 @@ app.get('/hod/staffadvisors',(req,res)=>hod.getAdvisors(req,res))
 
 //admin routes
 app.post('/admin/hod/register',(req,res)=>admin.hodregister(req,res))
+app.get('/admin/hods',(req,res)=>admin.displayhods(req,res))
 app.post('/admin/authority/register',(req,res)=>admin.authorityregister(req,res))
 
 function checkAuthenticated(req, res, next){

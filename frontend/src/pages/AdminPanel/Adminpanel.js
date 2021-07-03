@@ -1,12 +1,34 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import ApNavbar from './ApNavbar'
 import PrincipalCard from './PrincipalCard'
 import DeanCard from './DeanCard'
 import HodCard from './HodCard'
 import {Button} from '@material-ui/core'
-
+import HodModal from './HodModal'
+import axios from 'axios'
+import {baseUrl} from '../../baseUrl'
 
 function Adminpanel() {
+
+    const[hods,setHods]=useState([]);
+    const[details,setDetails]=useState({
+        department:"AEI",
+        email:"",
+        password:""
+    })
+    useEffect(() => {
+        axios.get(`${baseUrl}/admin/hods`)
+        .then((res)=>{
+            console.log(res.data);
+            setHods(res.data);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+        
+    }, [])
+
+
     return (
 
 
@@ -19,14 +41,17 @@ function Adminpanel() {
                     <DeanCard />
 
                 </div>
-                <div className="underline ">List of Head of the department(HOD)</div>
-                <div className="w-full flex flex-row-reverse mr-10"> <Button  style={{textTransform:'capitalize',backgroundColor:'#4a86f7',color:'white',border:'none',margin:'5px'}}>Add HOD </Button>
-</div>
+                <div className="underline ">Head of the department(HOD)</div>
+                 {/* <div className="w-full flex flex-row-reverse mr-10"> <Button  style={{textTransform:'capitalize',backgroundColor:'#4a86f7',color:'white',border:'none',margin:'5px'}}>Add HOD </Button> 
+</div> */}
+                <HodModal details={details} setDetails={setDetails} setHods={setHods}/>
                 <div className="w-full px-5 ">
-                    <HodCard/>
-                    <HodCard/>
-                    <HodCard/>
-                    <HodCard/>
+                    {
+                        hods.map(hod=>{
+                            return(<HodCard email={hod.email} department={hod.department}/>)
+                        })
+                    }
+                    
                 </div>
                 <div></div>
             </div>

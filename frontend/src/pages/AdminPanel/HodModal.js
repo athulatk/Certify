@@ -53,7 +53,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function HodModal({details,setDetails,setAdvisors}) {
+export default function HodModal({details,setDetails,setHods}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -68,21 +68,19 @@ export default function HodModal({details,setDetails,setAdvisors}) {
   }
   const submitHandler = (e)=>{
     e.preventDefault();
-    setAdvisors(prev=>[...prev,{...details,batchId:{semester:details.semester}}])
-    axios.post(`${baseUrl}/hod/advisor/register`,{
-      name:details.name,
-      semester:details.semester,
-      department:'CSE',
+    // setHods(prev=>[...prev,details])
+    axios.post(`${baseUrl}/admin/hod/register`,{
+      department:details.department,
       email:details.email,
       password:details.password
     })
     .then((res)=>{
-      console.log(res)
+      setHods(res.data)
     })
     .catch((err)=>{
       console.log(err)
     })
-    setDetails({name:"",semester:"S1",email:"",password:""})
+    setDetails({department:"AEI",email:"",password:""})
     handleClose();
 
   }
@@ -101,32 +99,30 @@ export default function HodModal({details,setDetails,setAdvisors}) {
         </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle style={{backgroundColor:'#ECEFF4',textAlign:'center'}} id="customized-dialog-title" onClose={handleClose}>
-          Add Staff Advisor
+          Add HOD
         </DialogTitle>
         <DialogContent style={{backgroundColor:'#ECEFF4'}}>
             <form onSubmit={submitHandler}>
-                <label>Name<span className="text-blue-500 pl-30">*</span></label><br/>
-                <input name="name" value={details.name} className="border-blue-500" type="text" size="60" required onChange={handleChange}/><br />
                 <div className="mt-5">
-                <label>Semester<span className="text-blue-500 pl-30">*</span></label>
-                <select name="semester" className="ml-3 p-1 rounded-md border-blue-500 outline-none" onChange={handleChange} required>
-                    <option value="S1">S1</option>
-                    <option value="S2">S2</option>
-                    <option value="S3">S3</option>
-                    <option value="S4">S4</option>
-                    <option value="S5">S5</option>
-                    <option value="S6">S6</option>
-                    <option value="S7">S7</option>
-                    <option value="S8">S8</option>
+                <label>Department<span className="text-blue-500 pl-30">*</span></label>
+                <select name="department" className="ml-3 p-1 rounded-md border-blue-500 outline-none"  required onChange={handleChange}>
+                    <option value="AEI">Applied Electronics and Instrumentation</option>
+                    <option value="AR">Architecture</option>
+                    <option value="CE">Civil Engineering</option>
+                    <option value="CSE">Computer Science and Engineering</option>
+                    <option value="EEE">Electrical and Electronics Engineering</option>
+                    <option value="ECE">Electronics and Communication Engineering</option>
+                    <option value="IE">Industrial Engineering</option>
+                    <option value="ME">Mechanical Engineering</option>
                 </select>
                 </div>
                 <br />
                 <label>Email<span className="text-blue-500 pl-30">*</span></label><br/>
-                <input name="email" value={details.email} className="border-blue-500" type="email" size="60" required onChange={handleChange}/><br />
+                <input name="email"  className="border-blue-500" type="email" size="60" required onChange={handleChange}/><br />
                 <div className="mt-4">
                 <label>Password<span className="text-blue-500 pl-30">*</span></label><br/>
                 </div>
-                <input name="password" value={details.password} className="border-blue-500" type="password" size="60" required onChange={handleChange}/><br />
+                <input name="password"  className="border-blue-500" type="password" size="60" required onChange={handleChange}/><br />
                 <div className="flex w-full items-center justify-center">
                 <Button type="submit" style={{
                 textTransform:'capitalize',

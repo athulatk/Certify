@@ -10,6 +10,7 @@ import Approved from '../Approved/Approved'
 import Navbar from '../../components/Navbar'
 import XLSX from 'xlsx'
 import axios from 'axios'
+import { useLocation } from 'react-router-dom';
 
 
 export default function AdvisorHome(props) {
@@ -27,16 +28,17 @@ export default function AdvisorHome(props) {
     const [isuploaded,setisUploaded]=useState("false");
     const [fileuploaded,setfileUploaded]=useState(null);
     const [studentData,setStudentData]=useState([])
+    const location=useLocation();
 
     useEffect(() => {
         if(studentData.length!==0){
 
-            studentRegisterObj={
-                advisorUser:props.user, 
+            var studentRegisterObj={
+                advisorUser:location.state.user, 
                 studentData:studentData
             }
 
-            axios.post('http://localhost:8080/student/register',studentData)
+            axios.post('http://localhost:8080/student/register',studentRegisterObj)
             .then(res=>{
                 console.log(res);
             })
