@@ -10,6 +10,7 @@ import Approved from '../Approved/Approved'
 import Apply from '../Apply/Apply'
 import Navbar from '../../components/Navbar'
 import Profile from '../../components/Profile'
+import ChangePassword from '../../components/ChangePassword'
 import { useLocation } from 'react-router-dom'
 
 export default function Home({userData}) {
@@ -19,6 +20,7 @@ export default function Home({userData}) {
     const [approved, setApproved] = useState([])
     const [active, setActive] = useState("progress")
     const [modalActive, setModalActive] = useState(false)
+    const [pswd,setPswd] = useState(false)
     const location=useLocation();
     useEffect(() => {
         console.log(userData)
@@ -60,9 +62,13 @@ export default function Home({userData}) {
                 modalActive={modalActive}
                 setModalActive={setModalActive}
             />
+            <ChangePassword
+            pswd={pswd}
+            setPswd={setPswd}
+            />
 
             <div className="flex flex-col text-black w-full items-center space-y-8">
-                <Navbar setModalActive={setModalActive}/>
+                <Navbar setModalActive={setModalActive} setPswd={setPswd}/>
                     
                 <div className="pl-9 w-full text-left text-xl">Dashboard</div>
                 <section className="flex flex-col space-y-8 w-11/12 items-center ">

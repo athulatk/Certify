@@ -29,7 +29,7 @@ const Mymenu = withStyles({
   }))(MenuItem);
 
 
-function Navbar({setModalActive}) {
+function Navbar({setModalActive,setPswd}) {
     
     const [anchorEl, setAnchorEl] = React.useState(null);
     const history=useHistory();
@@ -63,7 +63,11 @@ function Navbar({setModalActive}) {
                             handleClose()
                             setModalActive(true)
                           }}>View Profile</StyledMenuItem>
-                          
+                          <StyledMenuItem onClick = {()=>{
+                            handleClose()
+                            setPswd(true)
+                          }}
+                          >Change Password</StyledMenuItem>
                         <StyledMenuItem onClick={handleClose} onClick={()=>history.push('/')}>Logout</StyledMenuItem>
                     </Mymenu>
 
