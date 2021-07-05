@@ -17,7 +17,7 @@ function Login() {
             <img src={Back} alt="" id="objects"/>
             <img src={Topcorner} alt="" id="topcorner"/>
             <img src={Bottomcorner} alt="" id="bottomcorner"/>
-            <div>
+            <div className="w-9/12">
             <img src={Logo} alt="" id="logo"/>
             <Loginform setLoggedIn={setLoggedIn} setUser={setUser}/>
             </div>

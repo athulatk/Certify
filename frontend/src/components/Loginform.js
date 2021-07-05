@@ -50,53 +50,55 @@ function Loginform(props) {
         })
     }
     return (
-        <div className="login__outerdiv" style={loginType?{height:'320px'}:{height:'190px'}}>
-            <div className="login__side">
-            <h4 className="text-lg font-bold">No more hassle for certificates!</h4>
+        <div className="flex transition-height duration-300 login__outerdiv" style={loginType?{height:'320px'}:{height:'190px'}}>
+            <div className="flex flex-col items-center rounded-l-3xl login__side justify-center w-4/12">
+            <h4 className="text-lg text-white font-bold">No more hassle for certificates!</h4>
             </div>
-         <div className="login__div">
+         <div className="w-8/12 flex flex-col justify-center px-7 rounded-r-xl bg-white">
              {loginType?
              <div>
-             <h2 style={{fontSize:'23px'}}>{loginType} Login</h2>
+             <h2 className='capitalize text-xl font-semibold text-blue-400'>{loginType} Login</h2>
              <hr/>
-             <h5>Welcome Back!</h5>
-             <p style={{fontSize:'12px',marginBottom:'0.5em'}}>Please log in to your account</p>
-             <form className="login__form">
-                 <div className="login__inputs">
-                     <div>
+             <h5 className='mt-3'>Welcome Back!</h5>
+             <p className='mb-2 text-sm'>Please log in to your account</p>
+             <form className="flex flex-col justify-center mt-4">
+                 <div className="flex items-center justify-between">
+                     <div className="w-5/12">
                          <label>Email</label><br/>
+                         <div className="w-full">
                          <input 
-                             value={email} 
+                             value={email}
+                             className="myinput w-full" 
                              onChange={e=>{setEmail(e.target.value)}} 
                              type="email" 
-                             size="30" 
                              placeholder="Enter Email"/>
+                        </div>
                      </div>
  
-                     <div>
+                     <div className="w-5/12">
                          <label>Password</label><br/>
-                         <div className="passwordcomp">
+                        <div className="passwordcomp w-full">
                              <input 
                                  value={password} 
+                                 className="myinput w-full" 
                                  onChange={e=>{setPassword(e.target.value)}} 
                                  type={showPassword?"text":"password"} 
-                                 size="30" 
                                  placeholder="Enter password"/>
  
-                             <div className="icon" onClick={()=>setShowPassword(!showPassword)}>
+                             <div className="absolute cursor-pointer top-3 right-2" onClick={()=>setShowPassword(!showPassword)}>
                                  {showPassword?<VisibilityIcon style={{color:'#827876'}}/>:<VisibilityOffIcon style={{color:'#827876'}}/>}
                              </div>
-                         </div>
+                        </div>
                      </div>
                  </div>
-                <div className="buttons">
+                <div className="flex items-center justify-between mt-6">
                     <Button style={{textTransform:'capitalize',backgroundColor:'white',color:'#4a86f7',border:'none',marginLeft:'0'}}
                      onClick={()=>setLoginType("")}>
                     <ArrowBackIosIcon style={{fontSize:'18px'}}/> Back</Button>
 
-                 <div className="login__buttons">
+                 <div className="flex items-center">
                      <Button style={{textTransform:'capitalize',backgroundColor:'white',color:'#4a86f7',border:'none'}}>Recover Password</Button>
-                     <Button variant="contained" color="primary" style={{textTransform:'capitalize',backgroundColor:'#4a86f7'}} onClick={Login}>Login</Button>
+                     <Button variant="contained" color="primary" style={{textTransform:'capitalize',backgroundColor:'#4a86f7',marginLeft:'1.5em'}} onClick={Login}>Login</Button>
                  </div>
                  </div>
              </form>
@@ -105,7 +107,7 @@ function Loginform(props) {
              :
 
              <div>
-             <h2 style={{fontSize:'23px'}}>Login as:</h2>
+             <h2 className='capitalize text-xl font-semibold text-blue-400'>Login as:</h2>
              <select name="certificate" className="ml-5 mt-6 p-1 w-4/12 rounded-md border-blue-500" required onChange={(e)=>setLoginType(e.target.value)}>
                      <option value="">Select role</option> 
                      <option value="student">Student</option>

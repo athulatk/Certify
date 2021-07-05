@@ -28,33 +28,35 @@ export default function ChangePassword({pswd,user,setPswd}) {
                         </div>
                 </div>
 
-                <section className="h-full flex items-center pl-10">
+                <section className="h-full w-full bg-black-50 flex items-center pl-10">
 
-                <form >
-                
-                <div className="form-group">
-                <label style={{color:"black", paddingRight:"33px"}} items-center>Enter new password  </label>
-                        <input style={{color:"black"}} placeholder="Enter password"
-                                type={showPassword?"text":"password"} 
-                                className="form-control"
-                                />
-                        <div 
-                        className="visibility1" onClick={()=>setShowPassword(!showPassword)}>
-                        {showPassword?<VisibilityIcon style={{color:'#827876',position:"absolute", top:"10em",left:"10em"}}/>:<VisibilityOffIcon style={{color:'#827876',position:"absolute", top:"12.2em",left:"33.5em"}}/>}
-                        </div>
+                <form className="m-auto w-3/5">
+                <div className="flex items-center justify-between w-full">
+                <label className="text-white">Enter new password</label>
+                <div className="relative">
+                <input style={{color:"black"}} placeholder="Enter password"
+                type={showPassword?"text":"password"} 
+                className="form-control"/>
+                <div className="absolute cursor-pointer top-3 right-2" onClick={()=>setShowPassword(!showPassword)}>
+                {showPassword?<VisibilityIcon style={{color:'#827876'}}/>:<VisibilityOffIcon style={{color:'#827876'}}/>}
                 </div>
-                <div className="form-group">
-                <label style={{color:"black",paddingRight:"10px"}}>Re-Enter new password</label>
-                        <input style={{color:"black"}} placeholder="Re-Enter password"
-                                type={showPassword?"text":"password"}  className="form-control"
-                        />
-                        <div className="visibility2" onClick={()=>setShowPassword(!showPassword)}>
-                        {showPassword?<VisibilityIcon style={{color:'#827876', position:"absolute",top:"14.1em",left:"33.6em"}}/>:<VisibilityOffIcon style={{color:'#827876',position:"absolute",top:"14.1em",left:"33.6em"}}/>}
-                        </div>
                 </div>
-                <Button className="button" color="primary" variant="contained"
-                style={{textTransform:'capitalize',backgroundColor:'#4a8fff', float:'right'}}              
+                </div>
+                <div className="flex items-center justify-between w-full mt-4">
+                <label className="text-white">Re-Enter new password</label>
+                <div className="relative">
+                <input style={{color:"black"}} placeholder="Re-Enter password"
+                type={showPassword?"text":"password"}  className="form-control ml-17"/>
+                <div className="absolute cursor-pointer top-3 right-2" onClick={()=>setShowPassword(!showPassword)}>
+                {showPassword?<VisibilityIcon style={{color:'#827876'}}/>:<VisibilityOffIcon style={{color:'#827876'}}/>}
+                </div>
+                </div>
+                </div>
+                <div className="w-full flex items-center justify-center mt-6">
+                <Button className="m-auto" color="primary" variant="contained"
+                style={{textTransform:'capitalize',backgroundColor:'white',color:'#4a8fff'}}              
                   >Submit</Button>
+                </div>
                 </form>
                 </section>
             </section>
