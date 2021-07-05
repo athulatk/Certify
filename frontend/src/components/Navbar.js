@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 
 const Mymenu = withStyles({
     paper: {
+
         marginTop: '50px',
         marginRight:'50px',
         paddingLeft:'2px',
@@ -15,7 +16,7 @@ const Mymenu = withStyles({
         borderRadius:'10px'
       },
     list:{
-        width:'160px'
+        width:'100%'
     }
   })(Menu);
 
