@@ -72,7 +72,7 @@ export default function Home({userData}) {
                     
                 <div className="pl-9 w-full text-left text-xl">Dashboard</div>
                 <section className="flex flex-col space-y-8 w-11/12 items-center ">
-                    <div className="text-lg text-left w-full">Welcome Peter</div>
+                    <div className="text-lg text-left w-full">Welcome {location.state.user.name}</div>
                     <section className="flex justify-between w-full  ">
                         <button 
                             className={"mr-3 focus:outline-none category "+(active==="progress"?"dashboard-button-click":"dashboard-button ")}
