@@ -5,7 +5,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
-import MenuIcon from '@material-ui/icons/Menu';
 
 const Mymenu = withStyles({
     paper: {
@@ -44,16 +43,11 @@ function Navbar({setModalActive,setPswd}) {
     };
 
     return (
-        <div className="w-full bg-white">
+        <div className="w-full">
         <nav className="w-full flex justify-between items-center pt-4 px-8">
-                <div className="flex space-x-8 items-center">
-                  <MenuIcon onClick={()=>{setSideBar(flag=>!flag)}}/>
-                  <img src={Logo} alt="" id="logo"/>
-                </div>
-
+                <img src={Logo} alt="" id="logo"/>
                 <div className="flex space-x-8 mr-5">
                     <img src={SearchIcon} alt=""/>
-                    
                     <div className="rounded-full cursor-pointer bg-white text-center text-sm h-10 w-10 ring-blue ring-2 pt-3" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                         S4A
                     </div>
