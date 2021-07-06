@@ -63,7 +63,7 @@ function Loginform(props) {
              <p className='mb-2 text-sm'>Please log in to your account</p>
              <form className="flex flex-col justify-center mt-4">
                  <div className="flex items-center justify-between">
-                     <div className="w-5/12">
+                     <div className="w-6/12">
                          <label>Email</label><br/>
                          <div className="w-full">
                          <input 
@@ -75,7 +75,7 @@ function Loginform(props) {
                         </div>
                      </div>
  
-                     <div className="w-5/12">
+                     <div className="w-6/12 ml-5">
                          <label>Password</label><br/>
                         <div className="passwordcomp w-full">
                              <input 

@@ -60,6 +60,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function ApplicationModal() {
   const [open, setOpen] = React.useState(false);
+  const [select,setSelect]=React.useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -67,6 +68,29 @@ export default function ApplicationModal() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleReturn = ()=>{
+    if(select){
+      console.log("helo");
+      setOpen(false);
+    }
+    else
+      alert("Please select 'Forward to'")
+  }
+
+  const handleForward = ()=>{
+    if(select){
+      console.log("helo");
+      setOpen(false);
+    }
+    else
+      alert("Please select 'Forward to'")
+    
+  }
+
+  const handleSelect = (e)=>{
+    setSelect(e.target.value);
+  }
 
   return (
     <div>
@@ -92,38 +116,52 @@ export default function ApplicationModal() {
            <h4>Requested For</h4><h4>: &emsp; Bonafide Certificate</h4>
            <h4>Applied Date</h4><h4>: &emsp; 30-04-2021</h4>
            </div>
-           <h4 className="mb-2">Request Letter:</h4>
-           <div className="grid gap-x-3 w-1/2 grid-cols-4">
-           <p className="border-2 rounded-md bg-white text-blue-500 cursor-pointer text-center"><AttachFileIcon style={{fontSize:18}}/> letter.pdf</p>
-           </div>
-           <h4 className="mt-3 mb-2">Other attachments:</h4>
+           <h3 className="mb-2 mt-5 text-lg font-bold">Request Letter</h3>
+           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia architecto, voluptas corporis dolorum quaerat aliquam assumenda omnis, alias repellat cupiditate mollitia nesciunt quibusdam beatae velit nihil in exercitationem nemo illum. Eum eligendi, aut cum cupiditate consequuntur ex fugiat suscipit repudiandae harum facere deserunt magni obcaecati neque explicabo, soluta ea illum laudantium nostrum sequi architecto vitae. Laudantium, aliquam, reprehenderit beatae praesentium voluptate, blanditiis iure porro ullam error repellendus odio hic sed molestias sint aliquid voluptatum fugit suscipit earum dolorum itaque debitis. Iste, eius. Delectus atque cumque dicta, voluptates officiis pariatur esse beatae provident, voluptatem eos porro molestiae? Facere temporibus quaerat aperiam?
+           <h4 className="mt-3 mb-2 text-lg font-bold">Attachments</h4>
            <div className="grid gap-x-3 gap-y-1 w-1/2 grid-cols-4">
            <p className="border-2 rounded-md bg-white text-blue-500 cursor-pointer text-center"><AttachFileIcon style={{fontSize:18}}/> letter.pdf</p>
            <p className="border-2 rounded-md bg-white text-blue-500 cursor-pointer text-center"><AttachFileIcon style={{fontSize:18}}/> letter.pdf</p>
            <p className="border-2 rounded-md bg-white text-blue-500 cursor-pointer text-center"><AttachFileIcon style={{fontSize:18}}/> letter.pdf</p>
            <p className="border-2 rounded-md bg-white text-blue-500 cursor-pointer text-center"><AttachFileIcon style={{fontSize:18}}/> letter.pdf</p>
            </div>
-           <h4 className="mt-3 mb-1">Description:</h4>
-           <h4 className="mb-3">Very urgent lorem ipsum dolor sit amet asdlfkjasldfkjlasljlkj lkjlkj lkjlkj lkjlkj lkjlk kdjf</h4>
-           <label>Remarks:</label><br/>
-           <textarea cols="100" rows="3" className="border-2 outline-none p-2"/>
-           <div className="w-full flex items-center justify-between mt-2">
+           {/* <h4 className="mt-5 mb-2 text-lg font-bold">Description</h4>
+           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus deserunt omnis in animi facilis accusamus alias minima hic corrupti deleniti amet accusantium numquam nostrum repellendus nemo recusandae nam possimus architecto, molestias officiis repellat doloribus? Quae vitae debitis sit earum provident? Expedita commodi rem ad quisquam perspiciatis harum ipsam facilis suscipit! */}
+           <div className="mt-5">
+           <label htmlFor="remarks" className="text-lg font-bold">Remarks</label><br/>
+           <textarea name="remarks" cols="100" rows="2" className="border-2 outline-none p-2"/>
+           </div>
+           <div className="mt-5 flex items-center justify-between">
+             <div>
+           <span className="font-semibold">Forward to:</span>
+           <select name="forwardto" id="forwardselect" className="outline-none ml-2" onChange={handleSelect}>
+             <option value="">Select</option>
+             <option value="Principal">Principal</option>
+             <option value="Dean">Dean</option>
+           </select>
+           </div>
+
+           <div className="flex items-center justify-end mt-2">
            
             <Button variant="contained"
             style={{
                 textTransform:'capitalize',
                 outline:'none',
                 backgroundColor:'white',
-                color:'#528CF8'}}>
-            <ReplayIcon style={{fontSize:20,marginRight:'0.2em'}}/> Return</Button>
+                color:'#528CF8'}}  onClick={handleReturn}>
+            <ReplayIcon style={{fontSize:20,marginRight:'0.2em'}}/> Return/Reject</Button>
             <Button variant="contained"
             style={{
                 textTransform:'capitalize',
                 outline:'none',
                 backgroundColor:'#528CF8',
-                color:'white'}}>
-            <ThumbUpIcon style={{fontSize:18,marginRight:'0.2em'}}/> Approve </Button>
+                color:'white',
+                marginLeft:'5em'}}  onClick={handleForward}>
+            <ThumbUpIcon style={{fontSize:18,marginRight:'0.2em'}}/> Approve and Forward </Button>
             </div>
+
+            </div>
+           
 
           </div>
         </DialogContent>
