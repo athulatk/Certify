@@ -3,7 +3,7 @@ import {Button} from '@material-ui/core'
 import axios from 'axios'
 // import DownloadIcon from '../../assets/download.svg'
 
-export default function Apply({apply}) {
+export default function Apply({user}) {
     const[others,setOthers]=useState(false);
     const[certType,setCertType]=useState("Bonafide Certificate");
     const [recipent, setRecipent] = useState("Principal")
@@ -16,6 +16,8 @@ export default function Apply({apply}) {
             'http://localhost:8080/student/apply',
             {
                 params : {
+                    batchId:user.batchId,
+                    studentId:user.ktuId,
                     category:certType,
                     recipent:recipent,
                     letter:body

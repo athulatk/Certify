@@ -16,7 +16,7 @@ exports.applications=async (req, res)=>{
 
     dataApplication.forEach(application=>{
         const dataStud=studentUser.find({studentId:application.studentId})
-        data.append({
+        data.push({
             application:application,
             student:dataStud
         })

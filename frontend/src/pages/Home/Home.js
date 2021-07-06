@@ -122,7 +122,7 @@ export default function Home({userData}) {
                     {(active==="progress")&&(<InProgress inProgress={inProgress}/>)}
                     {(active==="returned")&&(<Returned returned={returned}/>)}
                     {(active==="approved")&&(<Approved approved={approved}/>)}
-                    {(active==="apply")&&(<Apply/>)} 
+                    {(active==="apply")&&(<Apply user={location.state.user}/>)} 
                 </section>
             </div>
         </section>

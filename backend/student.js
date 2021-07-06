@@ -18,7 +18,7 @@ exports.apply=(req,res)=>{
     }
 
     application.create(data, function (err, small) {
-        if (err) return handleError(err);
+        if (err) console.log(err);
         console.log(small)
         // saved!
     });
