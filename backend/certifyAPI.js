@@ -1,31 +1,45 @@
 const express = require('express');
 const cors = require('cors');
-const passport=require('passport')
+
+const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 
 const {initializePassport}=require('./passport-config')
-initializePassport(passport)
+
+const passport=initializePassport()
 
 var app = express();
 
-app.use(cookieParser());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+// app.use(cookieParser());
+
+app.use(
+	bodyParser.urlencoded({
+		extended: false
+	})
+)
+
+app.use(bodyParser.json())
+
 app.use(session({
     // secret: process.env.SESSION_SECRET,
     secret: 'secretkey',
     resave: false,
     saveUninitialized: false
 }))
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 //Configuring express server
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json());
 
 const advisor= require('./advisor');
 const hod= require('./hod')
 const student = require('./student');
+const admin=require('./admin');
 
 //student routes
 app.get('/student/apply',(req, res)=>student.apply(req, res));
@@ -47,8 +61,14 @@ app.get('/advisor/application', (req, res)=>advisor.applications(req, res))
 app.get('/advisor/approve', (req, res)=>advisor.approveApplication(req, res))
 
 //hod routes
+app.post('/hod/login', passport.authenticate('hodLocal'), (req, res)=>hod.hodLogin(req, res))
 app.post('/hod/advisor/register', (req, res)=>hod.advisorRegister(req, res))
 app.get('/hod/staffadvisors',(req,res)=>hod.getAdvisors(req,res))
+
+//admin routes
+app.post('/admin/hod/register',(req,res)=>admin.hodregister(req,res))
+app.get('/admin/hods',(req,res)=>admin.displayhods(req,res))
+app.post('/admin/authority/register',(req,res)=>admin.authorityregister(req,res))
 
 function checkAuthenticated(req, res, next){
     console.log("im heeree")

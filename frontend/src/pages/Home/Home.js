@@ -9,17 +9,21 @@ import Returned from '../Returned/Returned'
 import Approved from '../Approved/Approved'
 import Apply from '../Apply/Apply'
 import Navbar from '../../components/Navbar'
-import Sidebar from '../../components/Sidebar'
+import Profile from '../../components/Profile'
+import ChangePassword from '../../components/ChangePassword'
+import { useLocation } from 'react-router-dom'
 
-export default function Home() {
+export default function Home({userData}) {
 
     const [inProgress, setInProgress] = useState([])
     const [returned, setReturned] = useState([])
     const [approved, setApproved] = useState([])
     const [active, setActive] = useState("progress")
-    const [sideBar, setSideBar] = useState(false)
-
+    const [modalActive, setModalActive] = useState(false)
+    const [pswd,setPswd] = useState(false)
+    const location=useLocation();
     useEffect(() => {
+        console.log(userData)
         const mydata=DummyData;
         
         var myProgress=[]
@@ -42,21 +46,33 @@ export default function Home() {
     }, [DummyData])
 
     return (
-
-        <section className="flex flex-col w-full">
-            <div className="w-full flex flex-col justify-start">
-                <Navbar setSideBar={setSideBar}/>
-
-                <div className={"relative transition duration-500 ease-in-out bg-gray-100  py-10 px-2 "+(sideBar?"w-2/12":"w-0 hidden")}>
-                    <Sidebar/>
-                </div>
-            </div>
+        <section className="w-full">
+            <Profile 
+                // user={
+                //         {name:"shuhaib", 
+                //         semester:"s6", 
+                //         department:"cse",
+                //         regNo:"TVE18CS061",
+                //         advisors:[
+                //             "sreelal",
+                //             "preethi"
+                //         ]}
+                //     } 
+                user={location.state.user}
+                modalActive={modalActive}
+                setModalActive={setModalActive}
+            />
+            <ChangePassword
+            pswd={pswd}
+            setPswd={setPswd}
+            />
 
             <div className="flex flex-col text-black w-full items-center space-y-8">
+                <Navbar setModalActive={setModalActive} setPswd={setPswd}/>
                     
                 <div className="pl-9 w-full text-left text-xl">Dashboard</div>
                 <section className="flex flex-col space-y-8 w-11/12 items-center ">
-                    <div className="text-lg text-left w-full">Welcome Peter</div>
+                    <div className="text-lg text-left w-full">Welcome {location.state.user.name}</div>
                     <section className="flex justify-between w-full  ">
                         <button 
                             className={"mr-3 focus:outline-none category "+(active==="progress"?"dashboard-button-click":"dashboard-button ")}

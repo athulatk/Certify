@@ -1,15 +1,13 @@
 import React from 'react'
-import SearchIcon from '../assets/search.svg'
-import Logo from '../assets/logo.svg'
+import SearchIcon from '../../assets/search.svg'
+import Logo from '../../assets/logo.svg'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
-import MenuIcon from '@material-ui/icons/Menu';
 
 const Mymenu = withStyles({
     paper: {
-
         marginTop: '50px',
         marginRight:'50px',
         paddingLeft:'2px',
@@ -17,7 +15,7 @@ const Mymenu = withStyles({
         borderRadius:'10px'
       },
     list:{
-        width:'100%'
+        width:'160px'
     }
   })(Menu);
 
@@ -31,7 +29,7 @@ const Mymenu = withStyles({
   }))(MenuItem);
 
 
-function Navbar({setModalActive,setPswd}) {
+function ApNavbar() {
     
     const [anchorEl, setAnchorEl] = React.useState(null);
     const history=useHistory();
@@ -44,15 +42,10 @@ function Navbar({setModalActive,setPswd}) {
     };
 
     return (
-        <div className="w-full bg-white">
+        <div className="w-full">
         <nav className="w-full flex justify-between items-center pt-4 px-8">
-                <div className="flex space-x-8 items-center">
-                  <MenuIcon onClick={()=>{setSideBar(flag=>!flag)}}/>
-                  <img src={Logo} alt="" id="logo"/>
-                </div>
-
-                <div className="flex space-x-8 mr-5">
-                    <img src={SearchIcon} alt=""/>
+                <img src={Logo} alt="" id="logo"/>
+                <div className="flex space-x-8 mr-100">
                     
                     <div className="rounded-full cursor-pointer bg-white text-center text-sm h-10 w-10 ring-blue ring-2 pt-3" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                         S4A
@@ -65,16 +58,7 @@ function Navbar({setModalActive,setPswd}) {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                      >
-                        <StyledMenuItem 
-                          onClick={()=>{
-                            handleClose()
-                            setModalActive(true)
-                          }}>View Profile</StyledMenuItem>
-                          <StyledMenuItem onClick = {()=>{
-                            handleClose()
-                            setPswd(true)
-                          }}
-                          >Change Password</StyledMenuItem>
+                        <StyledMenuItem onClick={handleClose}>View Profile</StyledMenuItem>
                         <StyledMenuItem onClick={handleClose} onClick={()=>history.push('/')}>Logout</StyledMenuItem>
                     </Mymenu>
 
@@ -90,4 +74,4 @@ function Navbar({setModalActive,setPswd}) {
     )
 }
 
-export default Navbar
+export default ApNavbar

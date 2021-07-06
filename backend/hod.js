@@ -3,6 +3,11 @@ const bcrypt=require('bcrypt')
 const {advisorUser}= require('./models/advisorSchema')
 const {batch}=require('./models/batchSchema')
 
+exports.hodLogin=(req, res) => {
+    req.user.password=null
+    res.send(req.user)
+}
+
 exports.advisorRegister= async (req,res)=>{
     try{
         var hashedPassword=await bcrypt.hash(req.body.password,10)

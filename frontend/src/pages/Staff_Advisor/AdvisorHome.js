@@ -10,9 +10,10 @@ import Approved from '../Approved/Approved'
 import Navbar from '../../components/Navbar'
 import XLSX from 'xlsx'
 import axios from 'axios'
+import { useLocation } from 'react-router-dom';
 
 
-export default function AdvisorHome() {
+export default function AdvisorHome(props) {
 
     const [recieved, setRecieved] = useState([{
         name:"N Athul Kumar",
@@ -27,10 +28,17 @@ export default function AdvisorHome() {
     const [isuploaded,setisUploaded]=useState("false");
     const [fileuploaded,setfileUploaded]=useState(null);
     const [studentData,setStudentData]=useState([])
+    const location=useLocation();
 
     useEffect(() => {
         if(studentData.length!==0){
-            axios.post('http://localhost:8080/student/register',studentData)
+
+            var studentRegisterObj={
+                advisorUser:location.state.user, 
+                studentData:studentData
+            }
+
+            axios.post('http://localhost:8080/advisor/student/register',studentRegisterObj)
             .then(res=>{
                 console.log(res);
             })
@@ -39,10 +47,6 @@ export default function AdvisorHome() {
             })}
     }, [studentData])
         
-        
- 
-
-
     const fileUpload=(e)=>{
         const uploadedfile=e.target.files[0];
         console.log(e.target.files[0])
@@ -54,41 +58,42 @@ export default function AdvisorHome() {
                 const bstr = e.target.result;
                 const workbook = XLSX.read(bstr, { type: "binary" });
                 var worksheet = workbook.Sheets['Sheet1'];
-    //getting the complete sheet
-    // console.log(worksheet);
+                
+                //getting the complete sheet
+                // console.log(worksheet);
   
-    var headers = {};
-    var data = [];
-    for (var z in worksheet) {
-      if (z[0] === "!") continue;
-      //parse out the column, row, and value
-      var col = z.substring(0, 1);
-      // console.log(col);
-  
-      var row = parseInt(z.substring(1));
-      // console.log(row);
-  
-      var value = worksheet[z].v;
-      // console.log(value);
-  
-      //store header names
-      if (row == 1) {
-        headers[col] = value;
-        // storing the header names
-        continue;
-      }
-  
-      if (!data[row]) data[row] = {};
-      data[row][headers[col]] = value;
-    }
-    //drop those first two rows which are empty
-    data.shift();
-    data.shift();
-    console.log(data);
-    setStudentData(data)       
-    }
-    reader.readAsBinaryString(uploadedfile);
-    }
+                var headers = {};
+                var data = [];
+                for (var z in worksheet) {
+                    if (z[0] === "!") continue;
+                    //parse out the column, row, and value
+                    var col = z.substring(0, 1);
+                    // console.log(col);
+                
+                    var row = parseInt(z.substring(1));
+                    // console.log(row);
+                
+                    var value = worksheet[z].v;
+                    // console.log(value);
+                
+                    //store header names
+                    if (row == 1) {
+                        headers[col] = value;
+                        // storing the header names
+                        continue;
+                    }
+                
+                    if (!data[row]) data[row] = {};
+                    data[row][headers[col]] = value;
+                }
+                //drop those first two rows which are empty
+                data.shift();
+                data.shift();
+                console.log(data);
+                setStudentData(data)       
+            }
+            reader.readAsBinaryString(uploadedfile);
+        }
 
     }
 
@@ -99,7 +104,7 @@ export default function AdvisorHome() {
             <div className="pl-9 w-full text-left text-xl">Dashboard</div>
             <section className="flex flex-col space-y-8 w-11/12 items-center ">
                 <div className="flex items-center w-full justify-between">
-                <div className="text-lg text-left">Welcome Staff Advisor</div>
+                <div className="text-lg text-left">Welcome {location.state.user.name}</div>
                 <div>
                 <input
                     accept=".xlsx"

@@ -1,6 +1,7 @@
 const {studentUser}=require('./models/studentuserSchema')
 const {advisorUser}=require('./models/advisorSchema')
 var {application}=require('./models/applicationSchema')
+const bcrypt=require('bcrypt')
 
 exports.advisorLogin=(req, res) => {
     req.user.password=null
@@ -60,20 +61,26 @@ exports.returnAppication=(req, res) => {
 }
 
 exports.studentRegister= async (req,res)=>{
-    for(var i=0;i<req.body.length;i++){
+
+    const advisorUser=req.body.advisorUser
+    const studentData=req.body.studentData
+
+    for(var i=0;i<studentData.length;i++){
         try{
-            var hashedPassword=await bcrypt.hash(req.body[i].Password,10)
-            req.body[i].Password=hashedPassword;
+            var hashedPassword=await bcrypt.hash(studentData[i].password,10)
+            studentData[i].password=hashedPassword;
 
             var user=new studentUser({
-                ...req.body[i],
-                loginCount:0
+                ...studentData[i],
+                loginCount:0,
+                batchId:advisorUser.batchId
             })
             user.save()
         }
         catch{
             return res.status(500).send()
-        }   
+        }
+        
     }
     return res.send("Success..");
         

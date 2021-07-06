@@ -1,4 +1,52 @@
-.login__form{
+.login__side{
+    background-image: linear-gradient(to top right,#528CF8,#669afa,#c3dfff);
+}
+.login__outerdiv{
+    box-shadow: 9px 11px 15px -4px rgba(48,47,47,0.64);
+    -webkit-box-shadow: 9px 11px 15px -4px rgba(48,47,47,0.64);
+    -moz-box-shadow: 9px 11px 15px -4px rgba(48,47,47,0.64);
+}
+.myinput{
+    margin:0.3em 0 0 0;
+    border: 1px solid gray;
+    outline: none;
+    padding:0.5em 0 0.5em 0.5em;
+    border-radius: 5px;
+} 
+.passwordcomp{
+    position:relative;
+}
+/* .icon{
+    position: absolute;
+    right:0.6rem;
+    top:30%;
+    cursor:pointer;
+} */
+/* .buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1em;
+    margin-bottom: 0.2em;
+} */
+/* .login__buttons{
+    display: flex;
+    align-items: center;
+} */
+/* .login__buttons>button{
+    margin-left:20px;
+    outline: none;
+} */
+/* .login__div>h5{
+    margin-top:1.3em;
+} */
+/* .login__inputs{
+    display:flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+} */
+
+/* .login__form{
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -12,68 +60,4 @@
     border-radius:0 10px 10px 0;
     padding: 2em;
     background-color: white;  
-}
-.login__div>h3{
-    margin-bottom: 1em;    
-}
-.login__outerdiv{
-    display: flex;
-    box-shadow: 9px 11px 15px -4px rgba(48,47,47,0.64);
-    -webkit-box-shadow: 9px 11px 15px -4px rgba(48,47,47,0.64);
-    -moz-box-shadow: 9px 11px 15px -4px rgba(48,47,47,0.64);
-    border-radius: 10px;
-    transition: 0.3s ease;
-}
-.login__side{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 350px;
-    background-image: linear-gradient(to top right,#528CF8,#669afa,#c3dfff);
-    /* background-image: linear-gradient(to left bottom, #4a86f7, #4a86f7, #649aff, #6398fa, #6197fc); */
-    color: white;
-    border-radius: 10px 0 0 10px;
-}
-.login__div>h5{
-    margin-top:1.3em;
-}
-.login__inputs{
-    display:flex;
-    justify-content: space-between;
-    margin-bottom: 1em;
-}
-
-input{
-    margin:0.3em 0 0 0;
-    border: 1px solid gray;
-    outline: none;
-    padding:0.5em 0 0.5em 0.5em;
-    border-radius: 5px;
-    
-} 
-.buttons{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 1em;
-    margin-bottom: 0.2em;
-}
-.login__buttons{
-    display: flex;
-    align-items: center;
-}
-.login__buttons>button{
-    margin-left:20px;
-    outline: none;
-}
-.passwordcomp{
-    position:relative;
-}
-
-.icon{
-    position: absolute;
-    right:0.6rem;
-    top:30%;
-    cursor:pointer;
-}
+} */
