@@ -31,6 +31,7 @@ const student = require('./student');
 app.get('/student/apply',(req, res)=>student.apply(req, res));
 app.post('/student/editApplication', (req, res)=>student.editApplication(req, res))
 app.post('/student/login', passport.authenticate('studentLocal'), (req, res)=>student.studentLogin(req, res))
+app.post('/student/passwordChange', (req, res)=>student.passwordChange(req, res))
 app.get('/checkAuthenticated', checkAuthenticated, (req, res)=>{
     // console.log("heeree")
     req.user.password=null
@@ -40,6 +41,7 @@ app.get('/checkAuthenticated', checkAuthenticated, (req, res)=>{
 //staff advisor routes
 app.post('/advisor/login', passport.authenticate('advisorLocal'), (req, res)=>advisor.advisorLogin(req, res))
 app.post('/advisor/student/register', (req, res)=>advisor.studentRegister(req, res))
+app.post('/advisor/passwordChange', (req, res)=>advisor.passwordChange(req, res))
 app.get('/advisor/return', (req, res)=>advisor.returnApplication(req, res))
 app.get('/advisor/application', (req, res)=>advisor.applications(req, res))
 app.get('/advisor/approve', (req, res)=>advisor.approveApplication(req, res))

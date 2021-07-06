@@ -40,6 +40,21 @@ exports.editApplication=(req, res)=>{
     })
 }
 
+exports.passwordChange=async (req, res)=>{
+    
+    var hashedPassword=await bcrypt.hash(req.body.password,10)
+
+    studentUser.updateOne({email:req.body.email}, { $set: { password: hashedPassword } }, (err, log)=>{
+        if(!err)
+        {
+            console.log(log)
+            res.send("successsss")
+        }
+        else{
+            res.status(400).send()
+        }
+    })
+}
 exports.studentLogin=(req, res) => {
     req.user.password=null
     res.send(req.user)

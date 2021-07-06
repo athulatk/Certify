@@ -13,6 +13,7 @@ exports.advisorRegister= async (req,res)=>{
             password:hashedPassword
         };
 
+        //check for a batch in batches
         await batch.find({semester:req.body.semester, department:req.body.department},(err,log)=>{
             if(err) 
                 console.log("myerrorrr : ",err);
@@ -20,6 +21,7 @@ exports.advisorRegister= async (req,res)=>{
             {
                 console.log("length :",log.length)
 
+                //batch length = 0 means new batch to be created
                 if(log.length==0)
                 {
                     var newBatch={
@@ -38,6 +40,7 @@ exports.advisorRegister= async (req,res)=>{
                             data={...data, batchId: log._id}
                             console.log(data)
 
+                            //advisor created with batch id as objectid of this batch
                             myAdvisor=new advisorUser(data)
                 
                             myAdvisor.save((err, log)=>{
@@ -51,7 +54,7 @@ exports.advisorRegister= async (req,res)=>{
                         }
                     })
                 }
-                else
+                else //Add the new advisor with batch id as existing batch's object id
                 {
                     console.log("looog myyyy: ",log)
                     data={...data, batchId: log[0]._id}

@@ -7,8 +7,21 @@ exports.advisorLogin=(req, res) => {
     res.send(req.user)
 }
 
-exports.applications=(req, res)=>{
-    const data=application.find({batchId:req.query.batchId})
+exports.applications=async (req, res)=>{
+    const dataApplication=await application.find({batchId:req.query.batchId})
+    
+    console.log("mydatataaaaa : ",dataApplication)
+    const data=[]
+
+    dataApplication.forEach(application=>{
+        const dataStud=studentUser.find({studentId:application.studentId})
+        data.append({
+            application:application,
+            student:dataStud
+        })
+    })
+
+    data.sort((a,b)=>b.application.date - a.application.date)
     res.send(data)
 }
 
@@ -18,6 +31,22 @@ exports.approveAppication=(req, res) => {
             res.send("success")
         else
             res.status(400).send()
+    })
+}
+
+exports.passwordChange=async (req, res)=>{
+    
+    var hashedPassword=await bcrypt.hash(req.body.password,10)
+
+    advisorUser.updateOne({email:req.body.email}, { $set: { password: hashedPassword } }, (err, log)=>{
+        if(!err)
+        {
+            console.log(log)
+            res.send("successsss")
+        }
+        else{
+            res.status(400).send()
+        }
     })
 }
 
