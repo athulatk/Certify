@@ -13,19 +13,19 @@ export default function Recieved({recieved}) {
                 
             <section className="w-2/12 flex justify-center">
                 <div className="text-sm flex items-center justify-center ">
-                    <div>{data.name}</div>
+                    <div>{data.student.name}</div>
                 </div>
             </section>
 
             <section className="w-2/12 flex justify-center">
                 <div className="text-sm flex items-center justify-center ">
-                    <div>{data.semester} - </div> <div>{data.department}</div>
+                    <div>{data.student.semester}</div> - <div>{data.student.department}</div>
                 </div>
             </section>
 
             <section className="w-2/12 flex justify-center">
                 <div className="text-sm flex items-center justify-center ">
-                    <div>{data.certificate}</div>
+                    <div>{data.application.category}</div>
                 </div>
             </section>
 
@@ -34,7 +34,7 @@ export default function Recieved({recieved}) {
                 <div className="flex flex-col items-center">
                 <div className="text-xs">Applied date:</div>
                     <div className="text-sm flex items-center justify-center ">
-                        <div>{data.appno}</div>
+                        <div>{data.application.date.slice(0,10)}</div>
                     </div>
 
                     
@@ -45,17 +45,16 @@ export default function Recieved({recieved}) {
 
             <section className="w-2/12 flex justify-center">
                 <div className="text-sm flex items-center justify-center text-blue-500 cursor-pointer">
-                <ApplicationModal/>
+                <ApplicationModal data={data}/>
                 </div>
             </section>
 
-           
         </div>)
     }
 
     return (
         <div className="w-full flex flex-col items-center mx-3 py-8">
-            {recieved.map((data, index)=>renderData(data,index))}
+            {recieved?.map((data, index)=>renderData(data,index))}
         </div>
     )
 }

@@ -58,7 +58,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ApplicationModal() {
+export default function ApplicationModal({data}) {
   const [open, setOpen] = React.useState(false);
   const [select,setSelect]=React.useState("");
 
@@ -107,17 +107,18 @@ export default function ApplicationModal() {
         </DialogTitle>
         <DialogContent style={{}}>
           <div style={{marginLeft:'1em',marginRight:'1em'}}>
-           <h2 className="text-xl font-bold">N Athul Kumar</h2>
-           <h3 className="text-lg font-semibold">S6 CSE</h3>
+           <h2 className="text-xl font-bold">{data.student.name}</h2>
+           <h3 className="text-lg font-semibold">{data.student.semester} {data.student.department}</h3>
            <div className="grid gap-2 w-1/2 grid-cols-2 mt-3 mb-3">
-           <h4>Admission Number</h4><h4>: &emsp; 180287</h4>
-           <h4>Email</h4><h4>: &emsp; athulnvinod@gmail.com</h4>
-           <h4>University Id</h4><h4>: &emsp; TVE18CS042</h4>
-           <h4>Requested For</h4><h4>: &emsp; Bonafide Certificate</h4>
-           <h4>Applied Date</h4><h4>: &emsp; 30-04-2021</h4>
+           <h4>Admission No</h4><h4>: &emsp; {data.student.admissionNo}</h4>
+           <h4>Email</h4><h4>: &emsp; {data.student.email}</h4>
+           <h4>University Id</h4><h4>: &emsp; {data.student.ktuId}</h4>
+           <h4>Requested For</h4><h4>: &emsp; {data.application.category}</h4>
+           <h4>Applied Date</h4><h4>: &emsp; {data.application.date.slice(0,10)}</h4>
            </div>
            <h3 className="mb-2 mt-5 text-lg font-bold">Request Letter</h3>
-           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia architecto, voluptas corporis dolorum quaerat aliquam assumenda omnis, alias repellat cupiditate mollitia nesciunt quibusdam beatae velit nihil in exercitationem nemo illum. Eum eligendi, aut cum cupiditate consequuntur ex fugiat suscipit repudiandae harum facere deserunt magni obcaecati neque explicabo, soluta ea illum laudantium nostrum sequi architecto vitae. Laudantium, aliquam, reprehenderit beatae praesentium voluptate, blanditiis iure porro ullam error repellendus odio hic sed molestias sint aliquid voluptatum fugit suscipit earum dolorum itaque debitis. Iste, eius. Delectus atque cumque dicta, voluptates officiis pariatur esse beatae provident, voluptatem eos porro molestiae? Facere temporibus quaerat aperiam?
+           {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia architecto, voluptas corporis dolorum quaerat aliquam assumenda omnis, alias repellat cupiditate mollitia nesciunt quibusdam beatae velit nihil in exercitationem nemo illum. Eum eligendi, aut cum cupiditate consequuntur ex fugiat suscipit repudiandae harum facere deserunt magni obcaecati neque explicabo, soluta ea illum laudantium nostrum sequi architecto vitae. Laudantium, aliquam, reprehenderit beatae praesentium voluptate, blanditiis iure porro ullam error repellendus odio hic sed molestias sint aliquid voluptatum fugit suscipit earum dolorum itaque debitis. Iste, eius. Delectus atque cumque dicta, voluptates officiis pariatur esse beatae provident, voluptatem eos porro molestiae? Facere temporibus quaerat aperiam? */}
+           <div dangerouslySetInnerHTML={{__html:data.application.letter.replace(/\n/g, "<br />")}}/>
            <h4 className="mt-3 mb-2 text-lg font-bold">Attachments</h4>
            <div className="grid gap-x-3 gap-y-1 w-1/2 grid-cols-4">
            <p className="border-2 rounded-md bg-white text-blue-500 cursor-pointer text-center"><AttachFileIcon style={{fontSize:18}}/> letter.pdf</p>

@@ -1,6 +1,7 @@
 const {studentUser}=require('./models/studentuserSchema')
 const {advisorUser}=require('./models/advisorSchema')
 var {application}=require('./models/applicationSchema')
+const {batch} =require('./models/batchSchema')
 const bcrypt=require('bcrypt')
 
 exports.advisorLogin=(req, res) => {
@@ -8,22 +9,42 @@ exports.advisorLogin=(req, res) => {
     res.send(req.user)
 }
 
-exports.applications=async (req, res)=>{
-    const dataApplication=await application.find({batchId:req.query.batchId})
+exports.applications=async(req, res)=>{
+    var dataApplication=[];
+    var department;
+    var semester;
+    await batch.findOne({_id:req.query.batchId},(err,log)=>{
+        department=log.department
+        semester=log.semester
+    })
+    await application.find({batchId:req.query.batchId},(err,log)=>{
+        //console.log(log)
+        dataApplication=[...log];
+    })
     
     console.log("mydatataaaaa : ",dataApplication)
     const data=[]
 
-    dataApplication.forEach(application=>{
-        const dataStud=studentUser.find({studentId:application.studentId})
-        data.push({
-            application:application,
-            student:dataStud
-        })
-    })
+    for(var index in dataApplication){
 
+        await studentUser.findOne({ktuId:dataApplication[index].studentId},(err,log)=>{
+            console.log(log)
+            log["_doc"].department=department
+            log["_doc"].semester=semester
+            data.push({
+                application:dataApplication[index],
+                student:log
+            })
+        })
+    }
+    // dataApplication.forEach(async application=>{
+    //     //console.log(application,'\n');
+        
+    // })
     data.sort((a,b)=>b.application.date - a.application.date)
+    console.log(data)
     res.send(data)
+
 }
 
 exports.approveAppication=(req, res) => {

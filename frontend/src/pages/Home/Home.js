@@ -24,6 +24,9 @@ export default function Home({userData}) {
     const location=useLocation();
     useEffect(() => {
         console.log(userData)
+        if(location.state.user.loginCount===0){
+            setPswd(true);
+        }
         const mydata=DummyData;
         
         var myProgress=[]
@@ -63,6 +66,7 @@ export default function Home({userData}) {
                 setModalActive={setModalActive}
             />
             <ChangePassword
+            user={location.state.user}
             pswd={pswd}
             setPswd={setPswd}
             />
