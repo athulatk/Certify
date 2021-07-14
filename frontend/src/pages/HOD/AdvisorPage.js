@@ -6,7 +6,9 @@ import AdvisorCard from '../../components/AdvisorCard'
 import axios from 'axios'
 import {baseUrl} from '../../baseUrl'
 import CircularProgress from '@material-ui/core/CircularProgress';
-function AdvisorPage() {
+import { connect } from 'react-redux';
+
+function AdvisorPage(props) {
     const[loading,setLoading]=useState('true')
     const[advisors,setAdvisors]=useState([]);
     const[details,setDetails]=useState({
@@ -17,6 +19,9 @@ function AdvisorPage() {
     })
 
     useEffect(() => {
+        
+        const user=props.user
+
         axios.get(`${baseUrl}/hod/staffadvisors`)
         .then((res)=>{
             setLoading(false)
@@ -61,4 +66,16 @@ function AdvisorPage() {
     )
 }
 
-export default AdvisorPage
+//redux
+const mapStateToProps = state =>{
+    return {
+        user:state.user
+    }
+}
+
+const mapDispatchToProps= dispatch =>{
+    return {
+        dispatch: dispatch
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AdvisorPage);

@@ -8,9 +8,9 @@ import Recieved from './Recieved'
 import Returned from '../Returned/Returned'
 import Approved from '../Approved/Approved'
 import Navbar from '../../components/Navbar'
+import { connect } from 'react-redux';
 
-
-export default function Home() {
+function Home(props) {
 
     const [recieved, setRecieved] = useState([{
         name:"N Athul Kumar",
@@ -29,6 +29,8 @@ export default function Home() {
         history.push('/addadvisor')
     }
 
+    const user=props.user
+
     return (
         <div className="flex flex-col text-black w-full items-center space-y-8">
             <Navbar/>
@@ -36,7 +38,7 @@ export default function Home() {
             <div className="pl-9 w-full text-left text-xl">Dashboard</div>
             <section className="flex flex-col space-y-8 w-11/12 items-center ">
                 <div className="flex items-center w-full justify-between">
-                <div className="text-lg text-left">Welcome HOD CSE</div>
+                <div className="text-lg text-left">Welcome HOD {user.department}</div>
                 <Button variant="contained" onClick={addAdvisor} style={{textTransform:'capitalize',outline:'none',backgroundColor:'#528CF8',color:'white',marginRight:'0.9em'}}>Add/View Staff Advisors</Button>
                 </div>
                 <section className="flex justify-between w-full  ">
@@ -83,3 +85,17 @@ export default function Home() {
         </div>
     )
 }
+
+//redux
+const mapStateToProps = state =>{
+    return {
+        user:state.user
+    }
+}
+
+const mapDispatchToProps= dispatch =>{
+    return {
+        dispatch: dispatch
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

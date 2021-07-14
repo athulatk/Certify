@@ -11,9 +11,10 @@ import Navbar from '../../components/Navbar'
 import XLSX from 'xlsx'
 import axios from 'axios'
 import { useLocation } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 
-export default function AdvisorHome(props) {
+function AdvisorHome(props) {
 
     const [recieved, setRecieved] = useState([{
         name:"N Athul Kumar",
@@ -28,13 +29,15 @@ export default function AdvisorHome(props) {
     const [isuploaded,setisUploaded]=useState("false");
     const [fileuploaded,setfileUploaded]=useState(null);
     const [studentData,setStudentData]=useState([])
-    const location=useLocation();
+    // const location=useLocation();
+
+    const user=props.user
 
     useEffect(() => {
         if(studentData.length!==0){
 
             var studentRegisterObj={
-                advisorUser:location.state.user, 
+                advisorUser:user, 
                 studentData:studentData
             }
 
@@ -104,7 +107,7 @@ export default function AdvisorHome(props) {
             <div className="pl-9 w-full text-left text-xl">Dashboard</div>
             <section className="flex flex-col space-y-8 w-11/12 items-center ">
                 <div className="flex items-center w-full justify-between">
-                <div className="text-lg text-left">Welcome {location.state.user.name}</div>
+                <div className="text-lg text-left">Welcome {user.name}</div>
                 <div>
                 <input
                     accept=".xlsx"
@@ -164,3 +167,18 @@ export default function AdvisorHome(props) {
         </div>
     )
 }
+
+//redux
+const mapStateToProps = state =>{
+    return {
+        user:state.user
+    }
+}
+
+const mapDispatchToProps= dispatch =>{
+    return {
+        dispatch: dispatch
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdvisorHome);

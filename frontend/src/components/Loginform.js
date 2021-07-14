@@ -6,13 +6,17 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { useHistory } from 'react-router-dom';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import axios from 'axios';
-function Loginform(props) {
+import {userLogin} from '../redux/UserActions'
+
+export default function Loginform(props) {
 
     const [showPassword,setShowPassword]=useState(false);
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
     const [loginType,setLoginType]=useState("")
     const history=useHistory();
+
+    // const dispatch=useDispatch())
 
     useEffect(() => {
         // axios.defaults.withCredentials = true;
@@ -24,9 +28,10 @@ function Loginform(props) {
             console.log(error)
         })
     }, [])
-
+    
     const Login = (e) =>{
         e.preventDefault();
+        
         axios.post(`http://localhost:8080/${loginType}/login`,
             {
                 email:email,
@@ -44,6 +49,10 @@ function Loginform(props) {
             console.log(res.data)
             // props.setUser(res.data)
             // props.setLoggedIn(true)
+            props.dispatch({
+                ...userLogin(),
+                user:res.data
+            })
             history.push({pathname:`/${loginType}/home`,state:{user:res.data}})
         }).catch(error=>{
             console.log(error)
@@ -128,5 +137,3 @@ function Loginform(props) {
         </div>
     )
 }
-
-export default Loginform

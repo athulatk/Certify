@@ -12,8 +12,10 @@ import Navbar from '../../components/Navbar'
 import Profile from '../../components/Profile'
 import ChangePassword from '../../components/ChangePassword'
 import { useLocation } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
-export default function Home({userData}) {
+function Home(props) {
 
     const [inProgress, setInProgress] = useState([])
     const [returned, setReturned] = useState([])
@@ -21,9 +23,13 @@ export default function Home({userData}) {
     const [active, setActive] = useState("progress")
     const [modalActive, setModalActive] = useState(false)
     const [pswd,setPswd] = useState(false)
+
+    // const user=useSelector(state=>state.user)
+
     const location=useLocation();
     useEffect(() => {
-        console.log(userData)
+        console.log(props.user)
+        // console.log(userData)
         const mydata=DummyData;
         
         var myProgress=[]
@@ -58,10 +64,12 @@ export default function Home({userData}) {
                 //             "preethi"
                 //         ]}
                 //     } 
-                user={location.state.user}
+                // user={user}
+                user={props.user}
                 modalActive={modalActive}
                 setModalActive={setModalActive}
             />
+
             <ChangePassword
             pswd={pswd}
             setPswd={setPswd}
@@ -128,3 +136,19 @@ export default function Home({userData}) {
         </section>
     )
 }
+
+
+//redux
+const mapStateToProps = state =>{
+    return {
+        user:state.user
+    }
+}
+
+const mapDispatchToProps= dispatch =>{
+    return {
+        dispatch: dispatch
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

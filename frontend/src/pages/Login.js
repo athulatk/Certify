@@ -6,11 +6,13 @@ import Topcorner from '../assets/topcorner.svg'
 import Bottomcorner from '../assets/bottomcorner.svg'
 import Back from '../assets/background-obj.svg'
 import Home from './Home/Home'
+import { useSelector, useDispatch } from 'react-redux';
 
 function Login() {
 
     const [loggedIn, setLoggedIn] = useState(false)
     const [user, setUser] = useState(null)
+    const dispatch=useDispatch();
 
     return (
         <div className="login_page">
@@ -19,7 +21,7 @@ function Login() {
             <img src={Bottomcorner} alt="" id="bottomcorner"/>
             <div className="w-9/12">
             <img src={Logo} alt="" id="logo"/>
-            <Loginform setLoggedIn={setLoggedIn} setUser={setUser}/>
+            <Loginform setLoggedIn={setLoggedIn} setUser={setUser} dispatch={dispatch}/>
             </div>
         </div>
     )

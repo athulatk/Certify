@@ -10,32 +10,36 @@ import {
   Route
 } from "react-router-dom";
 import Adminpanel from './pages/AdminPanel/Adminpanel';
+// import store from './redux/store'
+// import { Provider } from 'react-redux'
+
 function App() {
+
   return (
-    <div className="App">
-      <Router>
-        <Switch>
-        <Route path="/student/home">
-        <Home/>
-        </Route>
-        <Route path="/hod/home">
-          <Hodhome/>
-        </Route>
-        <Route path="/advisor/home">
-          <AdvisorHome/>
-        </Route>
-        <Route path="/addadvisor">
-          <AdvisorPage/>
-        </Route>
-        <Route path="/adminpanel">
-        <Adminpanel/>
-        </Route>
-        <Route path="">
-        <Login/>
-        </Route>
-        
-        </Switch>
-     </Router>
+      <div className="App">
+        <Router>
+          <Switch>
+          <Route path="/student/home">
+          <Home/>
+          </Route>
+          <Route path="/hod/home">
+            <Hodhome/>
+          </Route>
+          <Route path="/advisor/home">
+            <AdvisorHome/>
+          </Route>
+          <Route path="/addadvisor">
+            <AdvisorPage/>
+          </Route>
+          <Route path="/adminpanel">
+          <Adminpanel/>
+          </Route>
+          <Route path="">
+          <Login/>
+          </Route>
+          
+          </Switch>
+      </Router>
     </div>
   );
 }
