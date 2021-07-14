@@ -17,7 +17,7 @@ exports.applications=async(req, res)=>{
         department=log.department
         semester=log.semester
     })
-    await application.find({batchId:req.query.batchId},(err,log)=>{
+    await application.find({batchId:req.query.batchId, status:'Staff Advisor'},(err,log)=>{
         //console.log(log)
         dataApplication=[...log];
     })
@@ -47,10 +47,13 @@ exports.applications=async(req, res)=>{
 
 }
 
-exports.approveAppication=(req, res) => {
-    application.updateOne({_id:req.query._id},{returned:false, approved:true, status:req.query.forwardTo}, (err, log)=>{
+exports.approveApplication=(req, res) => {
+    application.updateOne({_id:req.query._id},{status:"hod"}, (err, log)=>{
         if(!err)
+        {
+            console.log("stats changed : ",log)
             res.send("success")
+        }
         else
             res.status(400).send()
     })

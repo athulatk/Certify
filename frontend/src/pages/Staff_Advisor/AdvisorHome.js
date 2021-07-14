@@ -24,7 +24,7 @@ function AdvisorHome(props) {
     const [isuploaded,setisUploaded]=useState("false");
     const [fileuploaded,setfileUploaded]=useState(null);
     const [studentData,setStudentData]=useState([])
-    // const location=useLocation();
+    // const `loca`tion=useLocation();
 
     const user=props.user
 
@@ -47,8 +47,8 @@ function AdvisorHome(props) {
     }, [studentData])
 
     useEffect(() => {
-        console.log(location.state.user.batchId)
-        axios.get(`${baseUrl}/advisor/application?batchId=${location.state.user.batchId}`)
+        // console.log(location.state.user.batchId)
+        axios.get(`${baseUrl}/advisor/application?batchId=${user.batchId}`)
         .then(res=>{
             console.log(res)
             setRecieved(res.data)

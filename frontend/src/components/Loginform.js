@@ -51,7 +51,8 @@ export default function Loginform(props) {
             // props.setLoggedIn(true)
             props.dispatch({
                 ...userLogin(),
-                user:res.data
+                user:res.data,
+                loggedIn:loginType
             })
             history.push({pathname:`/${loginType}/home`,state:{user:res.data}})
         }).catch(error=>{

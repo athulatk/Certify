@@ -28,8 +28,7 @@ function Home(props) {
 
     const location=useLocation();
     useEffect(() => {
-        console.log(userData)
-        
+
         if(location.state.user.loginCount===0){
             setPswd(true);
         }

@@ -2,10 +2,50 @@ const bcrypt=require('bcrypt')
 
 const {advisorUser}= require('./models/advisorSchema')
 const {batch}=require('./models/batchSchema')
+const {studentUser}=require('./models/studentuserSchema')
+var {application}=require('./models/applicationSchema')
 
 exports.hodLogin=(req, res) => {
     req.user.password=null
     res.send(req.user)
+}
+
+exports.applications=async(req, res)=>{
+    var dataApplication=[];
+    var semester;
+    console.log("hod application called")
+    await application.find({department:req.query.department, status:'hod'},(err,log)=>{
+        //console.log(log)
+        dataApplication=[...log];
+    })
+    
+    console.log("mydatataaaaa : ",dataApplication)
+    const data=[]
+
+    for(var index in dataApplication){
+        
+        await batch.findOne({_id:dataApplication[index].batchId},(err,log)=>{
+            semester=log.semester
+        })
+
+        await studentUser.findOne({ktuId:dataApplication[index].studentId},(err,log)=>{
+            console.log(log)
+            log["_doc"].department=req.query.department
+            log["_doc"].semester=semester
+            data.push({
+                application:dataApplication[index],
+                student:log
+            })
+        })
+    }
+    // dataApplication.forEach(async application=>{
+    //     //console.log(application,'\n');
+        
+    // })
+    data.sort((a,b)=>b.application.date - a.application.date)
+    console.log(data)
+    res.send(data)
+
 }
 
 exports.advisorRegister= async (req,res)=>{

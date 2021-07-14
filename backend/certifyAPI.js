@@ -61,6 +61,7 @@ app.get('/advisor/application', (req, res)=>advisor.applications(req, res))
 app.get('/advisor/approve', (req, res)=>advisor.approveApplication(req, res))
 
 //hod routes
+app.get('/hod/application', (req, res)=>hod.applications(req, res))
 app.post('/hod/login', passport.authenticate('hodLocal'), (req, res)=>hod.hodLogin(req, res))
 app.post('/hod/advisor/register', (req, res)=>hod.advisorRegister(req, res))
 app.get('/hod/staffadvisors',(req,res)=>hod.getAdvisors(req,res))

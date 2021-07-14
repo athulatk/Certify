@@ -9,16 +9,12 @@ import Returned from '../Returned/Returned'
 import Approved from '../Approved/Approved'
 import Navbar from '../../components/Navbar'
 import { connect } from 'react-redux';
+import axios from 'axios'
+import { baseUrl } from '../../baseUrl';
 
 function Home(props) {
 
-    const [recieved, setRecieved] = useState([{
-        name:"N Athul Kumar",
-        semester:"S6",
-        certificate:'Bonafide Certificate',
-        department:"CSE",
-        appno:'16'
-    }])
+    const [recieved, setRecieved] = useState(null)
     const [returned, setReturned] = useState([])
     const [approved, setApproved] = useState([])
     const [active, setActive] = useState("recieve")
@@ -30,6 +26,19 @@ function Home(props) {
     }
 
     const user=props.user
+
+    useEffect(() => {
+        // console.log(location.state.user.batchId)
+        console.log("myuser  : ",user)
+        axios.get(`${baseUrl}/hod/application?department=${user.department}`)
+        .then(res=>{
+            console.log(res)
+            setRecieved(res.data)
+        })
+        .catch(err=>{
+            console.error(err)
+        })
+    }, [])
 
     return (
         <div className="flex flex-col text-black w-full items-center space-y-8">
@@ -49,7 +58,7 @@ function Home(props) {
                             <img className="h-5 w-5 text-blue-500 focus:text-white" src={ProgressIcon} alt=""/>
                         </div>
                         
-                        <div className="text-2xl font-bold">{recieved.length}</div>
+                        <div className="text-2xl font-bold">{recieved?.length}</div>
                         <div className="text-lg font-semibold">Applications Recieved</div>
                         <div className={active==="recieve"?"text-xs text-left visible":"text-xs text-left invisible"}>Total requests pending for approval</div>
                     </button>
