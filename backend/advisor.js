@@ -27,7 +27,7 @@ exports.applications=async (req, res)=>{
 }
 
 exports.approveAppication=(req, res) => {
-    application.updateOne({_id:req.query._id},{returned:false, approved:true}, (err, log)=>{
+    application.updateOne({_id:req.query._id},{returned:false, approved:true, status:req.query.forwardTo}, (err, log)=>{
         if(!err)
             res.send("success")
         else
