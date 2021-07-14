@@ -28,8 +28,11 @@ function Home(props) {
 
     const location=useLocation();
     useEffect(() => {
-        console.log(props.user)
-        // console.log(userData)
+        console.log(userData)
+        
+        if(location.state.user.loginCount===0){
+            setPswd(true);
+        }
         const mydata=DummyData;
         
         var myProgress=[]
@@ -71,6 +74,7 @@ function Home(props) {
             />
 
             <ChangePassword
+            user={location.state.user}
             pswd={pswd}
             setPswd={setPswd}
             />

@@ -10,19 +10,14 @@ import Approved from '../Approved/Approved'
 import Navbar from '../../components/Navbar'
 import XLSX from 'xlsx'
 import axios from 'axios'
+import { baseUrl } from '../../baseUrl';
 import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
 function AdvisorHome(props) {
 
-    const [recieved, setRecieved] = useState([{
-        name:"N Athul Kumar",
-        semester:"S6",
-        certificate:'Bonafide Certificate',
-        department:"CSE",
-        appno:'16'
-    }])
+    const [recieved, setRecieved] = useState();
     const [returned, setReturned] = useState([])
     const [approved, setApproved] = useState([])
     const [active, setActive] = useState("recieve")
@@ -41,14 +36,28 @@ function AdvisorHome(props) {
                 studentData:studentData
             }
 
-            axios.post('http://localhost:8080/advisor/student/register',studentRegisterObj)
+            axios.post(`${baseUrl}/advisor/student/register`,studentRegisterObj)
             .then(res=>{
                 console.log(res);
+                alert("Data Uploaded Successfully!!")
             })
             .catch(err=>{
                 console.log(err);
             })}
     }, [studentData])
+
+    useEffect(() => {
+        console.log(location.state.user.batchId)
+        axios.get(`${baseUrl}/advisor/application?batchId=${location.state.user.batchId}`)
+        .then(res=>{
+            console.log(res)
+            setRecieved(res.data)
+        })
+        .catch(err=>{
+            console.error(err)
+        })
+    }, [])
+
         
     const fileUpload=(e)=>{
         const uploadedfile=e.target.files[0];
@@ -93,7 +102,7 @@ function AdvisorHome(props) {
                 data.shift();
                 data.shift();
                 console.log(data);
-                setStudentData(data)       
+                setStudentData(data);  
             }
             reader.readAsBinaryString(uploadedfile);
         }
@@ -131,7 +140,7 @@ function AdvisorHome(props) {
                             <img className="h-5 w-5 text-blue-500 focus:text-white" src={ProgressIcon} alt=""/>
                         </div>
                         
-                        <div className="text-2xl font-bold">{recieved.length}</div>
+                        <div className="text-2xl font-bold">{recieved?.length}</div>
                         <div className="text-lg font-semibold">Applications Recieved</div>
                         <div className={active==="recieve"?"text-xs text-left visible":"text-xs text-left invisible"}>Total requests pending for approval</div>
                     </button>

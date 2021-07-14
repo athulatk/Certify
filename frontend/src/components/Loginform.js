@@ -59,7 +59,7 @@ export default function Loginform(props) {
         })
     }
     return (
-        <div className="flex transition-height duration-300 login__outerdiv" style={loginType?{height:'320px'}:{height:'190px'}}>
+        <div className="flex transition-height duration-300 login__outerdiv rounded-3xl" style={loginType?{height:'320px'}:{height:'190px'}}>
             <div className="flex flex-col items-center rounded-l-3xl login__side justify-center w-4/12">
             <h4 className="text-lg text-white font-bold">No more hassle for certificates!</h4>
             </div>
