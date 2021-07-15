@@ -17,7 +17,7 @@ exports.applications=async(req, res)=>{
         department=log.department
         semester=log.semester
     })
-    await application.find({batchId:req.query.batchId, status:'Staff Advisor'},(err,log)=>{
+    await application.find({batchId:req.query.batchId},(err,log)=>{
         //console.log(log)
         dataApplication=[...log];
     })
@@ -48,10 +48,10 @@ exports.applications=async(req, res)=>{
 }
 
 exports.approveApplication=(req, res) => {
-    application.updateOne({_id:req.query._id},{status:"hod"}, (err, log)=>{
+    application.updateOne({_id:req.query._id}, { $set :  { status : "hod" } }, (err, log)=>{
         if(!err)
         {
-            console.log("stats changed : ",log)
+            console.log("status changed : ")
             res.send("success")
         }
         else

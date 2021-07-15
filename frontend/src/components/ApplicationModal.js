@@ -83,8 +83,8 @@ function ApplicationModal(props) {
 
   const handleForward = ()=>{
     // if(select){
-      
-    axios.get(`${baseUrl}/advisor/approve?forwardTo=${select}`)
+    console.log(props.data.application)
+    axios.get(`${baseUrl}/advisor/approve?_id=${props.data.application._id}`)
       .then(res=>{
           console.log(res)
       })
