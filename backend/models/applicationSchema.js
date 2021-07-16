@@ -12,10 +12,7 @@ const applicationSchema=new Schema({
     category: String,
     letter: String,
     date: Date,
-    attachments: [{
-        file: Buffer,
-        name: String
-    }],
+    attachments:[Buffer],
     status: String,
     returned: Boolean,
     approved: Boolean,

@@ -133,7 +133,7 @@ function Home(props) {
                     {(active==="progress")&&(<InProgress inProgress={inProgress}/>)}
                     {(active==="returned")&&(<Returned returned={returned}/>)}
                     {(active==="approved")&&(<Approved approved={approved}/>)}
-                    {(active==="apply")&&(<Apply user={location.state.user}/>)} 
+                    {(active==="apply")&&(<Apply user={location.state.user} setActive={setActive}/>)} 
                 </section>
             </div>
         </section>

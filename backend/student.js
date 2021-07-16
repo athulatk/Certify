@@ -17,9 +17,12 @@ exports.apply=(req,res)=>{
         feedback:null,
     }
 
-    application.create(data, function (err, small) {
-        if (err) console.log(err);
+    application.create(data,function (err, small) {
+        if (err) {
+            console.log(err)
+            res.send(err)};
         console.log(small)
+        res.status(200).send()
         // saved!
     });
 }

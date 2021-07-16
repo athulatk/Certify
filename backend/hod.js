@@ -14,7 +14,7 @@ exports.applications=async(req, res)=>{
     var dataApplication=[];
     var semester;
     console.log("hod application called")
-    await application.find({department:req.query.department, status:'hod'},(err,log)=>{
+    await application.find({department:req.query.department},(err,log)=>{
         //console.log(log)
         dataApplication=[...log];
     })

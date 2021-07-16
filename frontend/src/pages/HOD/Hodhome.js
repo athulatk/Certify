@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom'
 import ProgressIcon from '../../assets/progress.svg'
 import ReturnedIcon from '../../assets/returned.svg'
 import ApprovedIcon from '../../assets/approved.svg'
-import Recieved from './Recieved'
+import Recieved from '../Recieved/Recieved'
 import Returned from '../Returned/Returned'
 import Approved from '../Approved/Approved'
 import Navbar from '../../components/Navbar'
@@ -14,6 +14,7 @@ import { baseUrl } from '../../baseUrl';
 
 function Home(props) {
 
+    const [applications,setApplications]=useState([]);
     const [recieved, setRecieved] = useState(null)
     const [returned, setReturned] = useState([])
     const [approved, setApproved] = useState([])
@@ -33,7 +34,10 @@ function Home(props) {
         axios.get(`${baseUrl}/hod/application?department=${user.department}`)
         .then(res=>{
             console.log(res)
-            setRecieved(res.data)
+            setApplications(res.data)
+            setRecieved(res.data.filter((app)=>app.application.status==="hod"))
+            //setReturned(res.data.filter((app)=>app.application.returned))
+            //setApproved(res.data.filter((app)=>app.application.status!=="principal"))
         })
         .catch(err=>{
             console.error(err)

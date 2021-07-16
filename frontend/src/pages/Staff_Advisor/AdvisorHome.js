@@ -4,10 +4,11 @@ import PublishIcon from '@material-ui/icons/Publish';
 import ProgressIcon from '../../assets/progress.svg'
 import ReturnedIcon from '../../assets/returned.svg'
 import ApprovedIcon from '../../assets/approved.svg'
-import Recieved from '../HOD/Recieved'
+import Recieved from '../Recieved/Recieved'
 import Returned from '../Returned/Returned'
 import Approved from '../Approved/Approved'
 import Navbar from '../../components/Navbar'
+import CircularProgress from '@material-ui/core/CircularProgress';
 import XLSX from 'xlsx'
 import axios from 'axios'
 import { baseUrl } from '../../baseUrl';
@@ -17,7 +18,9 @@ import { connect } from 'react-redux';
 
 function AdvisorHome(props) {
 
-    const [recieved, setRecieved] = useState();
+    const [applications,setApplications]=useState([]);
+    const [loading,setLoading]=useState(true)
+    const [recieved, setRecieved] = useState([]);
     const [returned, setReturned] = useState([])
     const [approved, setApproved] = useState([])
     const [active, setActive] = useState("recieve")
@@ -27,6 +30,24 @@ function AdvisorHome(props) {
     // const `loca`tion=useLocation();
 
     const user=props.user
+
+
+    useEffect(() => {
+        // console.log(location.state.user.batchId)
+        axios.get(`${baseUrl}/advisor/application?batchId=${user.batchId}`)
+        .then(res=>{
+            console.log(res)
+            setApplications(res.data)
+            console.log(applications)
+            setRecieved(res.data.filter((app)=>app.application.status==="Staff Advisor"))
+            setReturned(res.data.filter((app)=>app.application.returned))
+            setApproved(res.data.filter((app)=>app.application.status!=="Staff Advisor"))
+            setLoading(false)
+        })
+        .catch(err=>{
+            console.error(err)
+        })
+    }, [])
 
     useEffect(() => {
         if(studentData.length!==0){
@@ -46,17 +67,7 @@ function AdvisorHome(props) {
             })}
     }, [studentData])
 
-    useEffect(() => {
-        // console.log(location.state.user.batchId)
-        axios.get(`${baseUrl}/advisor/application?batchId=${user.batchId}`)
-        .then(res=>{
-            console.log(res)
-            setRecieved(res.data)
-        })
-        .catch(err=>{
-            console.error(err)
-        })
-    }, [])
+    
 
         
     const fileUpload=(e)=>{
@@ -166,12 +177,13 @@ function AdvisorHome(props) {
                         <div className="text-lg font-semibold">Approved</div>
                         <div className={active==="approved"?"text-xs text-left visible":"text-xs text-left invisible"}>Details of the certificate which are approved.</div>
                     </button>
-
                 </section>
-
+                {loading?<CircularProgress style={{marginTop:'5em'}}/>:
+                <>
                 {(active==="recieve")&&(<Recieved recieved={recieved}/>)}
                 {(active==="returned")&&(<Returned returned={returned}/>)}
                 {(active==="approved")&&(<Approved approved={approved}/>)}
+                </>}
             </section>
         </div>
     )
