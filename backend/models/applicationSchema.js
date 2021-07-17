@@ -7,6 +7,10 @@ const applicationSchema=new Schema({
         type: Schema.Types.ObjectId,
         required:true
     },
+    department:{
+        type:String,
+        required:true
+    },
     studentId: String,
     recipent: String,
     category: String,

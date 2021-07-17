@@ -40,7 +40,7 @@ function AdvisorHome(props) {
             setApplications(res.data)
             console.log(applications)
             setRecieved(res.data.filter((app)=>app.application.status==="Staff Advisor"))
-            setReturned(res.data.filter((app)=>app.application.returned))
+            setReturned(res.data.filter((app)=>{return app.application.returned&&app.application.status==="Staff Advisor"}))
             setApproved(res.data.filter((app)=>app.application.status!=="Staff Advisor"))
             setLoading(false)
         })
@@ -66,8 +66,6 @@ function AdvisorHome(props) {
                 console.log(err);
             })}
     }, [studentData])
-
-    
 
         
     const fileUpload=(e)=>{

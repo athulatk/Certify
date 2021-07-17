@@ -40,9 +40,10 @@ const advisor= require('./advisor');
 const hod= require('./hod')
 const student = require('./student');
 const admin=require('./admin');
+const authority=require('./authority');
 
 //student routes
-app.get('/student/apply',(req, res)=>student.apply(req, res));
+app.post('/student/apply',(req, res)=>student.apply(req, res));
 app.get('/student/applications',(req, res)=>student.applications(req, res));
 app.post('/student/editApplication', (req, res)=>student.editApplication(req, res))
 app.post('/student/login', passport.authenticate('studentLocal'), (req, res)=>student.studentLogin(req, res))
@@ -66,6 +67,9 @@ app.get('/hod/application', (req, res)=>hod.applications(req, res))
 app.post('/hod/login', passport.authenticate('hodLocal'), (req, res)=>hod.hodLogin(req, res))
 app.post('/hod/advisor/register', (req, res)=>hod.advisorRegister(req, res))
 app.get('/hod/staffadvisors',(req,res)=>hod.getAdvisors(req,res))
+
+//authority
+app.post('/authority/login', passport.authenticate('authorityLocal'), (req, res)=>authority.authorityLogin(req, res))
 
 //admin routes
 app.post('/admin/hod/register',(req,res)=>admin.hodregister(req,res))

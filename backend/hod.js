@@ -14,8 +14,9 @@ exports.applications=async(req, res)=>{
     var dataApplication=[];
     var semester;
     console.log("hod application called")
-    await application.find({department:req.query.department},(err,log)=>{
+    await application.find({department:req.query.department, status:{ $ne : "Staff Advisor"}},(err,log)=>{
         //console.log(log)
+        if(!err)
         dataApplication=[...log];
     })
     

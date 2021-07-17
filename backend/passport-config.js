@@ -3,6 +3,7 @@ const {studentUser}=require('./models/studentuserSchema')
 const {advisorUser}=require('./models/advisorSchema')
 const {batch}=require('./models/batchSchema')
 const {hodUser}=require('./models/hodSchema')
+const {authority}=require('./models/authoritySchema')
 
 const passport=require('passport')
 const bcrypt=require('bcrypt')
@@ -85,6 +86,7 @@ const initializePassport=()=>{
     passport.use('studentLocal',new LocalStrategy({usernameField:'email'}, authenticateUser(studentUser, true)));
     passport.use('advisorLocal',new LocalStrategy({usernameField:'email'}, authenticateUser(advisorUser, false)));
     passport.use('hodLocal',new LocalStrategy({usernameField:'email'}, authenticateUser(hodUser, false)));
+    passport.use('authorityLocal',new LocalStrategy({usernameField:'email'}, authenticateUser(authority, false)));
 
     return passport
 }
