@@ -32,7 +32,7 @@ function Home(props) {
     const location=useLocation();
     useEffect(() => {
 
-        if(location.state.user.loginCount===0){
+        if(props.user.loginCount===0){
             setPswd(true);
         }
         axios.get(`${baseUrl}/student/applications?studentId=TVE18CS047`)
@@ -90,7 +90,7 @@ function Home(props) {
             />
 
             <ChangePassword
-            user={location.state.user}
+            user={props.user}
             pswd={pswd}
             setPswd={setPswd}
             />
@@ -100,7 +100,7 @@ function Home(props) {
                     
                 <div className="pl-9 w-full text-left text-xl">Dashboard</div>
                 <section className="flex flex-col space-y-8 w-11/12 items-center ">
-                    <div className="text-lg text-left w-full">Welcome {location.state.user.name}</div>
+                    <div className="text-lg text-left w-full">Welcome {props.user.name}</div>
                     <section className="flex justify-between w-full  ">
                         <button 
                             className={"mr-3 focus:outline-none category "+(active==="progress"?"dashboard-button-click":"dashboard-button ")}
@@ -150,13 +150,12 @@ function Home(props) {
                     {(active==="progress")&&(<InProgress inProgress={inProgress}/>)}
                     {(active==="returned")&&(<Returned returned={returned}/>)}
                     {(active==="approved")&&(<Approved approved={approved}/>)}
-                    {(active==="apply")&&(<Apply user={location.state.user} setActive={setActive}/>)} 
+                    {(active==="apply")&&(<Apply user={props.user} setActive={setActive}/>)} 
                 </section>
             </div>
         </section>
     )
 }
-
 
 //redux
 const mapStateToProps = state =>{

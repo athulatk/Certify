@@ -16,33 +16,34 @@ export default function Apply({user,setActive}) {
 
     const applyCall=(e)=>{
         e.preventDefault();
-        const formdata=new FormData();
-        formdata.append('batchId',user.batchId)
-        formdata.append('studentId',user.ktuId)
-        formdata.append('category',certType)
-        formdata.append('recipent',recipent)
-        formdata.append('letter',body)
-        formdata.append("attachments", files)
+        // const formdata=new FormData();
+        // formdata.append('batchId',user.batchId)
+        // formdata.append('studentId',user.ktuId)
+        // formdata.append('category',certType)
+        // formdata.append('recipent',recipent)
+        // formdata.append('letter',body)
+        // formdata.append("attachments", files)
 
         axios.post(
-            'http://localhost:8080/student/apply', formdata, {
-                // You need to use `getHeaders()` in Node.js because Axios doesn't
-                // automatically set the multipart form boundary in Node.
-                headers: { "Content-Type": "multipart/form-data" },
-            }
-            // {
-            //     params : {
-            //         batchId:user.batchId,
-            //         studentId:user.ktuId,
-            //         category:certType,
-            //         recipent:recipent,
-            //         letter:body,
-            //         attachments:files
-            //     },
-            //     headers:{
-            //         'Content-Type':'multipart/form-data'
-            //     }
+            'http://localhost:8080/student/apply',
+            //  formdata, {
+            //     // You need to use `getHeaders()` in Node.js because Axios doesn't
+            //     // automatically set the multipart form boundary in Node.
+            //     headers: { "Content-Type": "multipart/form-data" },
             // }
+            {
+                params : {
+                    batchId:user.batchId,
+                    studentId:user.ktuId,
+                    category:certType,
+                    recipent:recipent,
+                    letter:body,
+                    attachments:files
+                },
+                headers:{
+                    'Content-Type':'multipart/form-data'
+                }
+            }
         ).then(res=>{
             if(res.status===200)
             {

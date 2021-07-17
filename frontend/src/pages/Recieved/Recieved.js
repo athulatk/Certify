@@ -1,6 +1,6 @@
 import React from 'react'
 import ApplicationModal from '../../components/ApplicationModal'
-export default function Recieved({recieved}) {
+export default function Recieved({recieved, setModifyCount}) {
 
     const renderData=(data, index)=>{
         return(<div className="bg-white py-4 rounded px-2 flex flex-row ring-2 shadow-xl ring-blue-500 items-center justify-between w-full my-2">
@@ -45,7 +45,7 @@ export default function Recieved({recieved}) {
 
             <section className="w-2/12 flex justify-center">
                 <div className="text-sm flex items-center justify-center text-blue-500 cursor-pointer">
-                <ApplicationModal data={data}/>
+                <ApplicationModal data={data} setModifyCount={setModifyCount}/>
                 </div>
             </section>
 

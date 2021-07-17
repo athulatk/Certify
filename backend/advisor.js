@@ -18,7 +18,7 @@ exports.applications=async(req, res)=>{
         semester=log.semester
     })
     await application.find({batchId:req.query.batchId},(err,log)=>{
-        //console.log(log)
+        console.log(log)
         dataApplication=[...log];
     })
     
@@ -75,8 +75,8 @@ exports.passwordChange=async (req, res)=>{
     })
 }
 
-exports.returnAppication=(req, res) => {
-    application.updateOne({_id:req.query._id},{returned:true, approved:false}, (err, log)=>{
+exports.returnApplication=(req, res) => {
+    application.updateOne({_id:req.query._id},{ $set : {returned:true, approved:false}}, (err, log)=>{
         if(!err)
             res.send("success")
         else

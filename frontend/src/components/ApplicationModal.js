@@ -73,12 +73,20 @@ function ApplicationModal(props) {
   };
 
   const handleReturn = ()=>{
-    if(select){
-      console.log("helo");
-      setOpen(false);
-    }
-    else
-      alert("Please select 'Forward to'")
+    console.log(props.data.application)
+    axios.get(`${baseUrl}/advisor/return?_id=${props.data.application._id}`)
+      .then(res=>{
+          console.log(res)
+          props.setModifyCount(approveCount=>approveCount+1)
+      })
+      .catch(err=>{
+          console.error(err)
+    })
+    console.log("helo");
+    setOpen(false);
+    // }
+    // else
+    //   alert("Please select 'Forward to'")
   }
 
   const handleForward = ()=>{
@@ -87,6 +95,7 @@ function ApplicationModal(props) {
     axios.get(`${baseUrl}/advisor/approve?_id=${props.data.application._id}`)
       .then(res=>{
           console.log(res)
+          props.setModifyCount(approveCount=>approveCount+1)
       })
       .catch(err=>{
           console.error(err)

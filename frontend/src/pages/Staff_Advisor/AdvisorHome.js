@@ -27,13 +27,15 @@ function AdvisorHome(props) {
     const [isuploaded,setisUploaded]=useState("false");
     const [fileuploaded,setfileUploaded]=useState(null);
     const [studentData,setStudentData]=useState([])
+    const [modifyCount, setModifyCount] = useState(0) //approve count for updating the application llist after updating
+                                                        //Used in useEffect below
     // const `loca`tion=useLocation();
 
     const user=props.user
 
 
     useEffect(() => {
-        // console.log(location.state.user.batchId)
+        console.log("user.batchid : ",user.batchId)
         axios.get(`${baseUrl}/advisor/application?batchId=${user.batchId}`)
         .then(res=>{
             console.log(res)
@@ -47,7 +49,7 @@ function AdvisorHome(props) {
         .catch(err=>{
             console.error(err)
         })
-    }, [])
+    }, [modifyCount])
 
     useEffect(() => {
         if(studentData.length!==0){
@@ -178,7 +180,7 @@ function AdvisorHome(props) {
                 </section>
                 {loading?<CircularProgress style={{marginTop:'5em'}}/>:
                 <>
-                {(active==="recieve")&&(<Recieved recieved={recieved}/>)}
+                {(active==="recieve")&&(<Recieved setModifyCount={setModifyCount} recieved={recieved}/>)}
                 {(active==="returned")&&(<Returned returned={returned}/>)}
                 {(active==="approved")&&(<Approved approved={approved}/>)}
                 </>}

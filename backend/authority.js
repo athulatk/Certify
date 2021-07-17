@@ -51,3 +51,40 @@ exports.applications=async(req, res)=>{
     res.send(data)
 
 }
+
+exports.approveApplication=(req, res) => {
+    application.updateOne({_id:req.query._id}, { $set :  { approved : true } }, (err, log)=>{
+        if(!err)
+        {
+            console.log("status changed : ")
+            res.send("success")
+        }
+        else
+            res.status(400).send()
+    })
+}
+
+exports.passwordChange=async (req, res)=>{
+    
+    var hashedPassword=await bcrypt.hash(req.body.password,10)
+
+    authority.updateOne({email:req.body.email}, { $set: { password: hashedPassword } }, (err, log)=>{
+        if(!err)
+        {
+            console.log(log)
+            res.send("successsss")
+        }
+        else{
+            res.status(400).send()
+        }
+    })
+}
+
+exports.returnAppication=(req, res) => {
+    application.updateOne({_id:req.query._id},{returned:true, approved:false}, (err, log)=>{
+        if(!err)
+            res.send("success")
+        else
+            res.status(400).send()
+    })
+}
