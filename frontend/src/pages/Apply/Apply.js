@@ -16,7 +16,13 @@ export default function Apply({user,setActive}) {
 
     const applyCall=(e)=>{
         e.preventDefault();
-        
+        // const formdata=new FormData();
+        // formdata.append('batchId',user.batchId)
+        // formdata.append('studentId',user.ktuId)
+        // formdata.append('category',certType)
+        // formdata.append('recipent',recipent)
+        // formdata.append('letter',body),
+
         axios.get(
             'http://localhost:8080/student/apply',
             {
@@ -27,6 +33,9 @@ export default function Apply({user,setActive}) {
                     recipent:recipent,
                     letter:body,
                     attachments:files
+                },
+                headers:{
+                    'Content-Type':'multipart/form-data'
                 }
             }
         ).then(res=>{

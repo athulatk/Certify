@@ -3,7 +3,7 @@ import ProgressIcon from '../../assets/progress.svg'
 import ReturnedIcon from '../../assets/returned.svg'
 import ApprovedIcon from '../../assets/approved.svg'
 import ApplyIcon from '../../assets/apply.svg'
-import DummyData from './HomeDummyData'
+//import DummyData from './HomeDummyData'
 import InProgress from '../InProgress/InProgress'
 import Returned from '../Returned/Returned'
 import Approved from '../Approved/Approved'
@@ -14,6 +14,8 @@ import ChangePassword from '../../components/ChangePassword'
 import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
+import axios from 'axios'
+import { baseUrl } from '../../baseUrl'
 
 function Home(props) {
 
@@ -23,6 +25,7 @@ function Home(props) {
     const [active, setActive] = useState("progress")
     const [modalActive, setModalActive] = useState(false)
     const [pswd,setPswd] = useState(false)
+    const [mydata,setMyData]=useState([]);
 
     // const user=useSelector(state=>state.user)
 
@@ -32,26 +35,40 @@ function Home(props) {
         if(location.state.user.loginCount===0){
             setPswd(true);
         }
-        const mydata=DummyData;
-        
-        var myProgress=[]
-        var myReturned=[]
-        var myApproved=[]
-        mydata.forEach(item=>
-        {
-            console.log(item)
-            if(item.inProgress)
-                myProgress.push(item)
-            if(item.returned)
-                myReturned.push(item)
-            if(item.approved)
-                myApproved.push(item)
+        axios.get(`${baseUrl}/student/applications?studentId=TVE18CS047`)
+        .then(res=>{
+            console.log(res);
+            setMyData(res.data);
+            setInProgress(res.data.filter((app)=>!app.approved && !app.returned))
+            setReturned(res.data.filter((app)=>app.returned))
+            setApproved(res.data.filter((app)=>app.approved))
+
+
         })
-        setInProgress(myProgress)
-        setReturned(myReturned)
-        setApproved(myApproved)
-        console.log(mydata)
-    }, [DummyData])
+        .then(err=>{
+            console.error(err);
+        })
+        
+        // var myProgress=[]
+        // var myReturned=[]
+        // var myApproved=[]
+        // mydata.forEach(item=>
+        // {
+        //     console.log(item)
+        //     if(item.inProgress)
+        //         myProgress.push(item)
+        //     if(item.returned)
+        //         myReturned.push(item)
+        //     if(item.approved)
+        //         myApproved.push(item)
+        // })
+        // setInProgress(myProgress)
+        // setReturned(myReturned)
+        // setApproved(myApproved)
+        // console.log(mydata)
+    }, [])
+
+    
 
     return (
         <section className="w-full">

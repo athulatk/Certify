@@ -5,6 +5,19 @@ const {application}=require('./models/applicationSchema')
 
 const bcrypt=require('bcrypt')
 
+
+exports.applications=(req,res)=>{
+    application.find({studentId:req.query.studentId}, (err,docs)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(docs);
+        }
+    });
+}
+
+
 exports.apply=(req,res)=>{
     var today = new Date().toISOString().slice(0, 10)
     // console.log("reques : ",req)

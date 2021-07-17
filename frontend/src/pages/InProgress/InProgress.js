@@ -14,7 +14,7 @@ export default function InProgress({inProgress}) {
                 
             <section className="w-2/12 flex justify-center">
                 <div className="text-sm flex items-center justify-center ">
-                    <div>{data.name}</div>
+                    <div>{data.category}</div>
                 </div>
             </section>
 
@@ -28,7 +28,7 @@ export default function InProgress({inProgress}) {
                 <div className="flex flex-col items-center">
                 <div className="text-xs">Applied date:</div>
                     <div className="text-sm flex items-center justify-center ">
-                        <div>{data.date}</div>
+                        <div>{data.date.slice(0,10)}</div>
                     </div>
 
                     
@@ -43,7 +43,7 @@ export default function InProgress({inProgress}) {
                         </div>
                     )}
                     <div className="text-sm flex items-center justify-center pr-3">
-                        <div>
+                        <div style={{textTransform:'capitalize'}}>
                             {data.status}
                         </div>
                     </div>
@@ -52,7 +52,7 @@ export default function InProgress({inProgress}) {
 
             <section className="w-2/12 flex justify-center">
                 <div className="text-sm flex items-center justify-center text-blue-500 cursor-pointer">
-                    <div>{data.letter}</div>
+                    <div>Letter</div>
                 </div>
             </section>
 

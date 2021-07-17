@@ -43,6 +43,7 @@ const admin=require('./admin');
 
 //student routes
 app.get('/student/apply',(req, res)=>student.apply(req, res));
+app.get('/student/applications',(req, res)=>student.applications(req, res));
 app.post('/student/editApplication', (req, res)=>student.editApplication(req, res))
 app.post('/student/login', passport.authenticate('studentLocal'), (req, res)=>student.studentLogin(req, res))
 app.post('/student/passwordChange', (req, res)=>student.passwordChange(req, res))
