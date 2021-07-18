@@ -64,6 +64,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function ApplicationModal(props) {
   const [open, setOpen] = React.useState(false);
   const [select,setSelect]=React.useState("");
+  const [feedback,setFeedback]=React.useState("");
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -74,7 +76,12 @@ function ApplicationModal(props) {
 
   const handleReturn = ()=>{
     console.log(props.data.application)
-    axios.get(`${baseUrl}/advisor/return?_id=${props.data.application._id}`)
+    axios.get(`${baseUrl}/advisor/return?_id=${props.data.application._id}`,
+    {
+      params:{
+        feedback:feedback
+      }
+    })
       .then(res=>{
           console.log(res)
           props.setModifyCount(approveCount=>approveCount+1)
@@ -153,7 +160,8 @@ function ApplicationModal(props) {
            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus deserunt omnis in animi facilis accusamus alias minima hic corrupti deleniti amet accusantium numquam nostrum repellendus nemo recusandae nam possimus architecto, molestias officiis repellat doloribus? Quae vitae debitis sit earum provident? Expedita commodi rem ad quisquam perspiciatis harum ipsam facilis suscipit! */}
            <div className="mt-5">
            <label htmlFor="remarks" className="text-lg font-bold">Remarks</label><br/>
-           <textarea name="remarks" cols="100" rows="2" className="border-2 outline-none p-2"/>
+           <textarea name="remarks" cols="100" rows="2" className="border-2 outline-none p-2"
+           onChange={(e)=>setFeedback(e.target.value)}/>
            </div>
            <div className="mt-5 flex items-center justify-between">
              <div>

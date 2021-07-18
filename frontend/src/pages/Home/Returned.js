@@ -14,7 +14,7 @@ export default function Returned({returned}) {
                 
             <section className="w-2/12 flex justify-center">
                 <div className="text-sm flex items-center justify-center ">
-                    <div>{data.student.name}</div>
+                    <div>{data.category}</div>
                 </div>
             </section>
 
@@ -23,15 +23,16 @@ export default function Returned({returned}) {
             <section className="w-2/12 rounded-l-full flex justify-center text-md" >
 
                     <div className="text-sm flex items-center justify-center pr-3">
-                        <div>
-                            {data.student.semester}-{data.student.department}
-                        </div>
+                    <div className="text-xs">Applied date:</div>
+                    <div className="text-sm flex items-center justify-center ">
+                        <div>&nbsp;{data.date.slice(0,10)}</div>
+                    </div>
                     </div>
 
             </section>
             <section className="w-2/12 flex justify-center">
                 <div className="text-xs flex items-center justify-center ">
-                    <div>{data.application.feedback}</div>
+                    <div>Remarks: {data.feedback}</div>
                 </div>
             </section>
             

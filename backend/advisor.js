@@ -76,7 +76,7 @@ exports.passwordChange=async (req, res)=>{
 }
 
 exports.returnApplication=(req, res) => {
-    application.updateOne({_id:req.query._id},{ $set : {returned:true, approved:false}}, (err, log)=>{
+    application.updateOne({_id:req.query._id},{ $set : {returned:true, approved:false,feedback:req.query.feedback}}, (err, log)=>{
         if(!err)
             res.send("success")
         else
