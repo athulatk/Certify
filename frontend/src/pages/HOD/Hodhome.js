@@ -15,7 +15,7 @@ import { baseUrl } from '../../baseUrl';
 function Home(props) {
 
     const [applications,setApplications]=useState([]);
-    const [recieved, setRecieved] = useState(null)
+    const [recieved, setRecieved] = useState([])
     const [returned, setReturned] = useState([])
     const [approved, setApproved] = useState([])
     const [active, setActive] = useState("recieve")
@@ -31,7 +31,7 @@ function Home(props) {
     useEffect(() => {
         // console.log(location.state.user.batchId)
         console.log("myuser  : ",user)
-        axios.get(`${baseUrl}/hod/application?department=${user.department}`)
+        axios.get(`${baseUrl}/hod/applications?department=${user.department}`)
         .then(res=>{
             console.log(res)
             setApplications(res.data)

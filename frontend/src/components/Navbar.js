@@ -5,6 +5,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
+import Profile from '../assets/profile.jpg';
 
 const Mymenu = withStyles({
     paper: {
@@ -48,9 +49,10 @@ function Navbar({setModalActive,setPswd}) {
                 <img src={Logo} alt="" id="logo"/>
                 <div className="flex space-x-8 mr-5">
                     <img src={SearchIcon} alt=""/>
-                    <div className="rounded-full cursor-pointer bg-white text-center text-sm h-10 w-10 ring-blue ring-2 pt-3" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                        S4A
-                    </div>
+                    <img src={Profile} alt="" className="rounded-full w-10 ring-blue ring-2 cursor-pointer" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}/>
+                    {/* <div className="rounded-full cursor-pointer bg-white text-center text-sm h-10 w-10 ring-blue ring-2 pt-3" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                      <img src={Profile} alt=""/>
+                    </div> */}
 
                     <Mymenu
                         id="simple-menu"

@@ -17,12 +17,12 @@ function AdvisorPage(props) {
         email:"",
         password:""
     })
-
+    const user=props.user
     useEffect(() => {
         
-        const user=props.user
+        
 
-        axios.get(`${baseUrl}/hod/staffadvisors`)
+        axios.get(`${baseUrl}/hod/staffadvisors?department=${user.department}`)
         .then((res)=>{
             setLoading(false)
             console.log(res.data);
@@ -46,8 +46,8 @@ function AdvisorPage(props) {
             :
             <div className="w-11/12">
             <div className="flex items-center justify-between mb-7 ml-2 mr-2">
-            <h2 className="text-xl font-semibold">Staff Advisors - CSE</h2>
-            <FormModal details={details} setDetails={setDetails} setAdvisors={setAdvisors}/>
+            <h2 className="text-xl font-semibold">Staff Advisors - {user.department}</h2>
+            <FormModal details={details} user={user} setDetails={setDetails} setAdvisors={setAdvisors}/>
             </div>
             <div className="grid gap-4 grid-cols-3">
             {

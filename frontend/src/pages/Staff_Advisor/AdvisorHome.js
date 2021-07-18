@@ -36,7 +36,7 @@ function AdvisorHome(props) {
 
     useEffect(() => {
         console.log("user.batchid : ",user.batchId)
-        axios.get(`${baseUrl}/advisor/application?batchId=${user.batchId}`)
+        axios.get(`${baseUrl}/advisor/applications?batchId=${user.batchId}`)
         .then(res=>{
             console.log(res)
             setApplications(res.data)

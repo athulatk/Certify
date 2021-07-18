@@ -53,7 +53,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function FormModal({details,setDetails,setAdvisors}) {
+export default function FormModal({details,setDetails,setAdvisors,user}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -72,7 +72,7 @@ export default function FormModal({details,setDetails,setAdvisors}) {
     axios.post(`${baseUrl}/hod/advisor/register`,{
       name:details.name,
       semester:details.semester,
-      department:'CSE',
+      department:user.department,
       email:details.email,
       password:details.password
     })

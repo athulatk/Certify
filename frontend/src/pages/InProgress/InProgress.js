@@ -18,11 +18,11 @@ export default function InProgress({inProgress}) {
                 </div>
             </section>
 
-            <section className="w-2/12 flex justify-center">
+            {/* <section className="w-2/12 flex justify-center">
                 <div className="text-sm flex items-center justify-center ">
                     <div>{data.category}</div>
                 </div>
-            </section>
+            </section> */}
 
             <section className="w-2/12 flex justify-center text-md">
                 <div className="flex flex-col items-center">
@@ -44,7 +44,7 @@ export default function InProgress({inProgress}) {
                     )}
                     <div className="text-sm flex items-center justify-center pr-3">
                         <div style={{textTransform:'capitalize'}}>
-                            {data.status}
+                            Status: {data.status}
                         </div>
                     </div>
                 </div>

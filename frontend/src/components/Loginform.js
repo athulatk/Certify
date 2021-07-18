@@ -123,8 +123,8 @@ export default function Loginform(props) {
                      <option value="student">Student</option>
                      <option value="advisor">Staff Advisor</option>
                      <option value="hod">HOD</option>
-                     <option value="principal">Principal</option>
-                     <option value="dean">U.G Dean</option>
+                     <option value="authority">Principal/Dean</option>
+                     {/* <option value="dean">U.G Dean</option> */}
                  </select>
                  {/* <div className="login__buttons">
                      <Button variant="contained" color="primary" style={{textTransform:'capitalize',backgroundColor:'#4a86f7'}}><ArrowForwardIosIcon style={{fontSize:'18px'}} onClick={()=>setConfirmLogin(loginType)}/> Next</Button>

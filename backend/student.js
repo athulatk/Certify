@@ -22,29 +22,29 @@ exports.apply=(req,res)=>{
     var today = new Date().toISOString().slice(0, 10)
     // console.log("reques : ",req.query)
 
-    console.log(req)
-    // var data={
-    //     ...req.query,
-    //     date:today,
-    //     status:"Staff Advisor",
-    //     returned:false,
-    //     approved:false,
-    //     feedback:null,
-    // }
+    //console.log(req.body)
+    var data={
+        ...req.body,
+        date:today,
+        status:"Staff Advisor",
+        returned:false,
+        approved:false,
+        feedback:null,
+    }
 
-    // batch.findOne({_id:req.query.batchId}, (err, log)=>{
-    //     data.department=log.department
-    //     console.log(data)
+    batch.findOne({_id:req.body.batchId}, (err, log)=>{
+        data.department=log.department
+        console.log(data)
 
-    //     application.create(data,function (err, small) {
-    //         if (err) {
-    //             console.log(err)
-    //             res.send(err)};
-    //         console.log(small)
-    //         res.status(200).send()
-    //         // saved!
-    //     });
-    // })
+        application.create(data,function (err, small) {
+            if (err) {
+                console.log(err)
+                res.send(err)};
+            console.log(small)
+            res.status(200).send()
+            // saved!
+        });
+    })
 
 }
 
@@ -61,6 +61,9 @@ exports.editApplication=(req, res)=>{
     }
 
     application.updateOne({_id:data._id},{...data},(err,log)=>{
+        if(err){
+            console.log(err)
+        }
         console.log("Number of Records Effected"+log);
         res.status(200).send("success")
     })

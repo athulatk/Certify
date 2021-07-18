@@ -66,7 +66,7 @@ function Home(props) {
         // setReturned(myReturned)
         // setApproved(myApproved)
         // console.log(mydata)
-    }, [])
+    }, [active])
 
     
 

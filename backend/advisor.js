@@ -41,7 +41,7 @@ exports.applications=async(req, res)=>{
     //     //console.log(application,'\n');
         
     // })
-    data.sort((a,b)=>b.application.date - a.application.date)
+    //data.sort((a,b)=>b.application.date - a.application.date)
     console.log(data)
     res.send(data)
 

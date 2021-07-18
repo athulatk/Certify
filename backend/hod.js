@@ -39,11 +39,12 @@ exports.applications=async(req, res)=>{
                     })
                 })
             }
+            data.sort((a,b)=>b.application.date - a.application.date)
+            console.log(data)
+            res.send(data)
         }
         
-        data.sort((a,b)=>b.application.date - a.application.date)
-        console.log(data)
-        res.send(data)
+        
     })
     
     // dataApplication.forEach(async application=>{
@@ -179,7 +180,7 @@ exports.advisorRegister= async (req,res)=>{
 
 exports.getAdvisors=(req,res)=>{
     var batches=[];
-    batch.find({department:"CSE"},function(err,docs){
+    batch.find({department:req.query.department},function(err,docs){
         if(docs.length!=0){
             docs.forEach((item)=>{
                 batches.push(item._id)

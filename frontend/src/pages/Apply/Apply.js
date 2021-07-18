@@ -7,8 +7,8 @@ import axios from 'axios'
 export default function Apply({user,setActive}) {
     const[others,setOthers]=useState(false);
     const[certType,setCertType]=useState("Bonafide Certificate");
-    const [recipent, setRecipent] = useState("Principal")
-    const [body, setBody] = useState("")
+    const[recipent, setRecipent] = useState("Principal")
+    const[body, setBody] = useState("")
     const[sub,setSub]=useState("");
     const[file,setFile]=useState("");
     const[files,setFiles]=useState([]);
@@ -16,35 +16,47 @@ export default function Apply({user,setActive}) {
 
     const applyCall=(e)=>{
         e.preventDefault();
-        // const formdata=new FormData();
-        // formdata.append('batchId',user.batchId)
-        // formdata.append('studentId',user.ktuId)
-        // formdata.append('category',certType)
-        // formdata.append('recipent',recipent)
-        // formdata.append('letter',body)
-        // formdata.append("attachments", files)
-
-        axios.post(
-            'http://localhost:8080/student/apply',
-            //  formdata, {
-            //     // You need to use `getHeaders()` in Node.js because Axios doesn't
-            //     // automatically set the multipart form boundary in Node.
-            //     headers: { "Content-Type": "multipart/form-data" },
-            // }
-            {
-                params : {
+        const formData=new FormData();
+        // formData.append("batchId",user.batchId)
+        // formData.append("studentId",user.ktuId)
+        // formData.append("category",certType)
+        // formData.append("recipent",recipent)
+        // formData.append("letter",body)
+        formData.append("attachments", files)
+        
+        axios({
+            method: 'post',
+            url: 'http://localhost:8080/student/apply',
+            data: {
                     batchId:user.batchId,
                     studentId:user.ktuId,
                     category:certType,
                     recipent:recipent,
                     letter:body,
-                    attachments:files
-                },
-                headers:{
-                    'Content-Type':'multipart/form-data'
-                }
-            }
-        ).then(res=>{
+                    //attachments:files
+            },
+            config: { headers: { 'Content-Type': 'multipart/form-data' } }
+          })
+        // axios.post(
+        //     'http://localhost:8080/student/apply',
+        //      formdata, {
+        //         headers: { "Content-Type": "multipart/form-data" },
+        //     }
+        //     // {
+        //     //     params : {
+        //     //         batchId:user.batchId,
+        //     //         studentId:user.ktuId,
+        //     //         category:certType,
+        //     //         recipent:recipent,
+        //     //         letter:body,
+        //     //         attachments:files
+        //     //     },
+        //     //     headers:{
+        //     //         'Content-Type':'multipart/form-data'
+        //     //     }
+        //     // }
+        // )
+        .then(res=>{
             if(res.status===200)
             {
                 console.log(res)
@@ -74,7 +86,7 @@ export default function Apply({user,setActive}) {
         //     {apply.map((data, index)=>renderData(data,index))}
         // </div>
         <div className="w-full">
-            <form onSubmit={applyCall}>
+            <form onSubmit={applyCall} enctype="multipart/form-data">
             <section className="border-b-2	border-gray-300	 p-5">
                 
                 <div className="text-sm text-left w-full mb-5"><h4 className="text-left">Fill below fields to submit the application</h4></div>
@@ -82,10 +94,10 @@ export default function Apply({user,setActive}) {
                
                 <label for="certificate" className="text-sm pl-10">Select Certificate <span className="text-blue-500	">*</span></label>
                 <select name="certificate" className="ml-5 p-1 rounded-md border-blue-500 outline-none" onChange={handleType}>
-                    <option value="bonafide">Bonafide Certificate</option>
-                    <option value="library">MCM Scholarship</option>
-                    <option value="tc">Transfer Certificate</option>
-                    <option value="hostel">E grantz scholarship</option>
+                    <option value="Bonafide Certificate">Bonafide Certificate</option>
+                    <option value="MCM Scholarship">MCM Scholarship</option>
+                    <option value="Transfer Certificate">Transfer Certificate</option>
+                    <option value="E grantz Scholarship">E grantz scholarship</option>
                     <option value="others">Others</option>
                 </select>
                 <br/>

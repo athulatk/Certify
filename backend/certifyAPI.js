@@ -35,6 +35,7 @@ app.use(passport.session());
 //Configuring express server
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json());
+app.use(express.urlencoded({extended:false}))
 
 const advisor= require('./advisor');
 const hod= require('./hod')
@@ -59,17 +60,18 @@ app.post('/advisor/login', passport.authenticate('advisorLocal'), (req, res)=>ad
 app.post('/advisor/student/register', (req, res)=>advisor.studentRegister(req, res))
 app.post('/advisor/passwordChange', (req, res)=>advisor.passwordChange(req, res))
 app.get('/advisor/return', (req, res)=>advisor.returnApplication(req, res))
-app.get('/advisor/application', (req, res)=>advisor.applications(req, res))
+app.get('/advisor/applications', (req, res)=>advisor.applications(req, res))
 app.get('/advisor/approve', (req, res)=>advisor.approveApplication(req, res))
 
 //hod routes
-app.get('/hod/application', (req, res)=>hod.applications(req, res))
+app.get('/hod/applications', (req, res)=>hod.applications(req, res))
 app.post('/hod/login', passport.authenticate('hodLocal'), (req, res)=>hod.hodLogin(req, res))
 app.post('/hod/advisor/register', (req, res)=>hod.advisorRegister(req, res))
 app.get('/hod/staffadvisors',(req,res)=>hod.getAdvisors(req,res))
 
 //authority
 app.post('/authority/login', passport.authenticate('authorityLocal'), (req, res)=>authority.authorityLogin(req, res))
+app.get('/authority/applications',(req,res)=>authority.applications(req,res))
 
 //admin routes
 app.post('/admin/hod/register',(req,res)=>admin.hodregister(req,res))

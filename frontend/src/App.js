@@ -29,7 +29,7 @@ function App() {
           <Route path="/advisor/home">
             <AdvisorHome/>
           </Route>
-          <Route path="/principal/home">
+          <Route path="/authority/home">
             <PrincipalHome/>
           </Route>
           <Route path="/addadvisor">
