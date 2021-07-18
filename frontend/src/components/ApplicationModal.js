@@ -76,7 +76,7 @@ function ApplicationModal(props) {
 
   const handleReturn = ()=>{
     console.log(props.data.application)
-    axios.get(`${baseUrl}/advisor/return?_id=${props.data.application._id}`,
+    axios.get(`${baseUrl}/${props.loggedIn}/return?_id=${props.data.application._id}`,
     {
       params:{
         feedback:feedback
@@ -99,7 +99,12 @@ function ApplicationModal(props) {
   const handleForward = ()=>{
     // if(select){
     console.log(props.data.application)
-    axios.get(`${baseUrl}/advisor/approve?_id=${props.data.application._id}`)
+    axios.get(`${baseUrl}/${props.loggedIn}/approve?_id=${props.data.application._id}`,
+    {
+      params:{
+        forwardTo:select
+      }
+    })
       .then(res=>{
           console.log(res)
           props.setModifyCount(approveCount=>approveCount+1)
@@ -171,8 +176,8 @@ function ApplicationModal(props) {
                 <span className="font-semibold">Forward to:</span>
                   <select name="forwardto" id="forwardselect" className="outline-none ml-2" onChange={handleSelect}>
                     <option value="">Select</option>
-                    <option value="Principal">Principal</option>
-                    <option value="Dean">Dean</option>
+                    <option value="principal">Principal</option>
+                    <option value="dean">Dean</option>
                   </select>
             </div>
             )}

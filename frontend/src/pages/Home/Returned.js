@@ -31,8 +31,14 @@ export default function Returned({returned}) {
 
             </section>
             <section className="w-2/12 flex justify-center">
-                <div className="text-xs flex items-center justify-center ">
-                    <div>Remarks: {data.feedback}</div>
+                <div className="text-sm flex items-center justify-center ">
+                    <div className="capitalize text-red-500 font-bold">Returned By {data.status}</div>
+                </div>
+            </section>
+
+            <section className="w-2/12 flex justify-center">
+                <div className="text-sm flex items-center justify-center ">
+                    <div>Feedback: {data.feedback}</div>
                 </div>
             </section>
             

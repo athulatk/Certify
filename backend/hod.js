@@ -55,6 +55,7 @@ exports.applications=async(req, res)=>{
 }
 
 exports.approveApplication=(req, res) => {
+    console.log(req.query.forwardTo)
     application.updateOne({_id:req.query._id}, { $set :  { status : req.query.forwardTo } }, (err, log)=>{
         if(!err)
         {

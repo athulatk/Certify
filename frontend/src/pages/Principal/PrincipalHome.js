@@ -5,6 +5,7 @@ import ProgressIcon from '../../assets/progress.svg'
 import ReturnedIcon from '../../assets/returned.svg'
 import ApprovedIcon from '../../assets/approved.svg'
 import Recieved from '../Recieved/Recieved'
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Returned from '../Returned/Returned'
 import Approved from '../Approved/Approved'
 import Navbar from '../../components/Navbar'
@@ -19,6 +20,8 @@ function PrincipalHome(props) {
     const [returned, setReturned] = useState([])
     const [approved, setApproved] = useState([])
     const [active, setActive] = useState("recieve")
+    const [modifyCount, setModifyCount] = useState(0)
+    const [loading,setLoading]=useState(true);
 
     
     const user=props.user
@@ -30,14 +33,15 @@ function PrincipalHome(props) {
         .then(res=>{
             console.log(res)
             setApplications(res.data)
-            setRecieved(res.data.filter((app)=>app.application.status===user.role))
-            //setReturned(res.data.filter((app)=>app.application.returned))
-            //setApproved(res.data.filter((app)=>app.application.status!=="principal"))
+            setRecieved(res.data.filter((app)=>{return !app.application.returned && !app.application.approved && app.application.status===user.role}))
+            setReturned(res.data.filter((app)=>{return app.application.status===user.role && app.application.returned}))
+            setApproved(res.data.filter((app)=>{return app.application.status===user.role && app.application.approved}))
+            setLoading(false);
         })
         .catch(err=>{
             console.error(err)
         })
-    }, [])
+    }, [modifyCount])
 
     return (
         <div className="flex flex-col text-black w-full items-center space-y-8">
@@ -85,9 +89,12 @@ function PrincipalHome(props) {
 
                 </section>
 
-                {(active==="recieve")&&(<Recieved recieved={recieved}/>)}
+                {loading?<CircularProgress style={{marginTop:'5em'}}/>:
+                <>
+                {(active==="recieve")&&(<Recieved setModifyCount={setModifyCount} recieved={recieved}/>)}
                 {(active==="returned")&&(<Returned returned={returned}/>)}
                 {(active==="approved")&&(<Approved approved={approved}/>)}
+                </>}
             </section>
         </div>
     )
