@@ -17,33 +17,42 @@ exports.applications=async(req, res)=>{
         department=log.department
         semester=log.semester
     })
-    await application.find({batchId:req.query.batchId},(err,log)=>{
-        console.log(log)
-        dataApplication=[...log];
+
+    await application.find({batchId:req.query.batchId},async (err,log)=>{
+
+        if(err)
+            res.status(400).send()
+        else
+        {
+            console.log(log)
+            dataApplication=[...log];
+    
+            console.log("mydatataaaaa : ",dataApplication)
+            const data=[]
+        
+            for(var index in dataApplication){
+        
+                await studentUser.findOne({ktuId:dataApplication[index].studentId},(err,log)=>{
+                    console.log(log)
+                    log["_doc"].department=department
+                    log["_doc"].semester=semester
+                    data.push({
+                        application:dataApplication[index],
+                        student:log
+                    })
+                })
+            }
+            // dataApplication.forEach(async application=>{
+            //     //console.log(application,'\n');
+                
+            // })
+            //data.sort((a,b)=>b.application.date - a.application.date)
+            console.log(data)
+            res.send(data)
+        }
     })
     
-    console.log("mydatataaaaa : ",dataApplication)
-    const data=[]
-
-    for(var index in dataApplication){
-
-        await studentUser.findOne({ktuId:dataApplication[index].studentId},(err,log)=>{
-            console.log(log)
-            log["_doc"].department=department
-            log["_doc"].semester=semester
-            data.push({
-                application:dataApplication[index],
-                student:log
-            })
-        })
-    }
-    // dataApplication.forEach(async application=>{
-    //     //console.log(application,'\n');
-        
-    // })
-    //data.sort((a,b)=>b.application.date - a.application.date)
-    console.log(data)
-    res.send(data)
+    // res.json({status : "not found"}).send()
 
 }
 
