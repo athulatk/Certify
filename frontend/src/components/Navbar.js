@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import Profile from '../assets/profile.jpg';
+import { connect } from 'react-redux';
 
 const Mymenu = withStyles({
     paper: {
@@ -31,7 +32,7 @@ const Mymenu = withStyles({
   }))(MenuItem);
 
 
-function Navbar({setModalActive,setPswd}) {
+function Navbar(props) {
     
     const [anchorEl, setAnchorEl] = React.useState(null);
     const history=useHistory();
@@ -61,14 +62,14 @@ function Navbar({setModalActive,setPswd}) {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                      >
-                        <StyledMenuItem 
+                        {props.loggedIn==="student"&&(<StyledMenuItem 
                           onClick={()=>{
                             handleClose()
-                            setModalActive(true)
-                          }}>View Profile</StyledMenuItem>
+                            props.setModalActive(true)
+                          }}>View Profile</StyledMenuItem>)}
                           <StyledMenuItem onClick = {()=>{
                             handleClose()
-                            setPswd(true)
+                            props.setPswd(true)
                           }}
                           >Change Password</StyledMenuItem>
                         <StyledMenuItem onClick={handleClose} onClick={()=>history.push('/')}>Logout</StyledMenuItem>
@@ -86,4 +87,18 @@ function Navbar({setModalActive,setPswd}) {
     )
 }
 
-export default Navbar
+//redux
+const mapStateToProps = state =>{
+  return {
+      user:state.user,
+      loggedIn:state.loggedIn
+  }
+}
+
+const mapDispatchToProps= dispatch =>{
+  return {
+      dispatch: dispatch
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

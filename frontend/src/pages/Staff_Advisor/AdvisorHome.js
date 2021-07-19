@@ -14,6 +14,7 @@ import axios from 'axios'
 import { baseUrl } from '../../baseUrl';
 import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ChangePassword from '../../components/ChangePassword';
 
 
 function AdvisorHome(props) {
@@ -27,9 +28,11 @@ function AdvisorHome(props) {
     const [isuploaded,setisUploaded]=useState("false");
     const [fileuploaded,setfileUploaded]=useState(null);
     const [studentData,setStudentData]=useState([])
+    const [pswd,setPswd] = useState(false)
     const [modifyCount, setModifyCount] = useState(0) //approve count for updating the application llist after updating
                                                         //Used in useEffect below
     // const `loca`tion=useLocation();
+
 
     const user=props.user
 
@@ -122,7 +125,12 @@ function AdvisorHome(props) {
 
     return (
         <div className="flex flex-col text-black w-full items-center space-y-8">
-            <Navbar/>
+            <Navbar setPswd={setPswd}/>
+
+            <ChangePassword
+            pswd={pswd}
+            setPswd={setPswd}
+            />
                 
             <div className="pl-9 w-full text-left text-xl">Dashboard</div>
             <section className="flex flex-col space-y-8 w-11/12 items-center ">

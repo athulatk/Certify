@@ -30,15 +30,15 @@ export default function Returned({returned}) {
                     </div>
 
             </section>
-            <section className="w-2/12 flex justify-center">
+            {/* <section className="w-2/12 flex justify-center">
                 <div className="text-sm flex items-center justify-center ">
                     <div className="capitalize text-red-500 font-bold">Returned By {data.status}</div>
                 </div>
-            </section>
+            </section> */}
 
             <section className="w-2/12 flex justify-center">
                 <div className="text-sm flex items-center justify-center ">
-                    <div>Feedback: {data.feedback}</div>
+                    <div><span className="capitalize text-red-500 font-bold">Returned - {data.status} : </span><br/> {data.feedback}</div>
                 </div>
             </section>
             

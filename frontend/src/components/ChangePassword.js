@@ -4,10 +4,12 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import axios from 'axios';
 import { baseUrl } from '../baseUrl';
-export default function ChangePassword({pswd,user,setPswd}) {
+import { connect } from 'react-redux';
+
+function ChangePassword(props) {
     const backClick=(e)=>{
         if(e.target===e.currentTarget)
-            setPswd(false)
+            props.setPswd(false)
     }
     const [showPassword,setShowPassword]=useState(false);
     var isValid=true;
@@ -17,15 +19,15 @@ export default function ChangePassword({pswd,user,setPswd}) {
     const submitHandler = (e)=>{
         e.preventDefault();
         if(password===confirmPassword){
-            axios.post(`${baseUrl}/student/passwordChange`,{
-                email:user.email,
+            axios.post(`${baseUrl}/${props.loggedIn}/passwordChange`,{
+                email:props.user.email,
                 password:password
             })
             .then(res=>{
                 console.log(res);
                 setPassword("");
                 setConfirmPassword("");
-                setPswd(false);
+                props.setPswd(false);
             })
             .catch(err=>{
                 console.error(err);
@@ -41,16 +43,16 @@ export default function ChangePassword({pswd,user,setPswd}) {
     return (
         <div 
             className={
-                "inset-0 fixed flex category justify-center items-center bg-white "+
-                (pswd?" bg-opacity-80 ":" bg-opacity-0 hidden ")}
+                "inset-0 z-40 fixed flex category justify-center items-center bg-white "+
+                (props.pswd?" bg-opacity-80 ":" bg-opacity-0 hidden ")}
             onClick={backClick}
         >
             <section className={
                             "bg-blue-400 text-white rounded-xl flex flex-col category w-7/12 h-1/2"
-                            +(pswd?" bg-opacity-100 ":" bg-opacity-0 hidden ") }>
+                            +(props.pswd?" bg-opacity-100 ":" bg-opacity-0 hidden ") }>
                 <div className="w-full flex justify-between pt-5 pr-5 border-b-2 border-white pb-4">
                         <div className="text-2xl font-semibold pl-10"> Change Password</div>
-                        <div onClick={()=>{setPswd(false)}}>
+                        <div onClick={()=>{props.setPswd(false)}}>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-red-500 hover:text-red-700 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
@@ -95,3 +97,19 @@ export default function ChangePassword({pswd,user,setPswd}) {
     )
 }
 
+//redux
+const mapStateToProps = state =>{
+    return {
+        user:state.user,
+        loggedIn:state.loggedIn
+    }
+}
+
+const mapDispatchToProps= dispatch =>{
+    return {
+        dispatch: dispatch
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword);
+  

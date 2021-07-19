@@ -66,6 +66,7 @@ app.get('/advisor/approve', (req, res)=>advisor.approveApplication(req, res))
 //hod routes
 app.get('/hod/applications', (req, res)=>hod.applications(req, res))
 app.post('/hod/login', passport.authenticate('hodLocal'), (req, res)=>hod.hodLogin(req, res))
+app.post('/hod/passwordChange', (req, res)=>advisor.passwordChange(req, res))
 app.post('/hod/advisor/register', (req, res)=>hod.advisorRegister(req, res))
 app.get('/hod/staffadvisors',(req,res)=>hod.getAdvisors(req,res))
 app.get('/hod/approve',(req,res)=>hod.approveApplication(req,res))
@@ -73,6 +74,7 @@ app.get('/hod/return', (req, res)=>hod.returnApplication(req, res))
 
 //authority
 app.post('/authority/login', passport.authenticate('authorityLocal'), (req, res)=>authority.authorityLogin(req, res))
+app.post('/authority/passwordChange', (req, res)=>advisor.passwordChange(req, res))
 app.get('/authority/applications',(req,res)=>authority.applications(req,res))
 app.get('/authority/approve',(req,res)=>authority.approveApplication(req,res))
 app.get('/authority/return',(req,res)=>authority.approveApplication(req,res))

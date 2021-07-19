@@ -90,7 +90,7 @@ function Home(props) {
             />
 
             <ChangePassword
-            user={props.user}
+            // user={props.user}
             pswd={pswd}
             setPswd={setPswd}
             />

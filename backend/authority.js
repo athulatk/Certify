@@ -54,7 +54,7 @@ exports.applications=async(req, res)=>{
 }
 
 exports.approveApplication=(req, res) => {
-    application.updateOne({_id:req.query._id}, { $set :  { approved : true,status:"Approved" } }, (err, log)=>{
+    application.updateOne({_id:req.query._id}, { $set :  { approved : true } }, (err, log)=>{
         if(!err)
         {
             console.log("status changed : ")
