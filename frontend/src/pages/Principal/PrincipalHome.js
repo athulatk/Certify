@@ -12,6 +12,7 @@ import Navbar from '../../components/Navbar'
 import { connect } from 'react-redux';
 import axios from 'axios'
 import { baseUrl } from '../../baseUrl';
+import ChangePassword from '../../components/ChangePassword';
 
 function PrincipalHome(props) {
 
@@ -22,6 +23,7 @@ function PrincipalHome(props) {
     const [active, setActive] = useState("recieve")
     const [modifyCount, setModifyCount] = useState(0)
     const [loading,setLoading]=useState(true);
+    const [pswd,setPswd] = useState(false)
 
     
     const user=props.user
@@ -45,7 +47,12 @@ function PrincipalHome(props) {
 
     return (
         <div className="flex flex-col text-black w-full items-center space-y-8">
-            <Navbar/>
+            <Navbar setPswd={setPswd}/>
+
+            <ChangePassword
+            pswd={pswd}
+            setPswd={setPswd}
+            />
                 
             <div className="pl-9 w-full text-left text-xl">Dashboard</div>
             <section className="flex flex-col space-y-8 w-11/12 items-center ">
