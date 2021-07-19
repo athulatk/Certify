@@ -57,6 +57,7 @@ export default function Loginform(props) {
             history.push({pathname:`/${loginType}/home`,state:{user:res.data}})
         }).catch(error=>{
             console.log(error)
+            alert("Login Failed! Try Again");
         })
     }
     return (
@@ -107,7 +108,7 @@ export default function Loginform(props) {
                     <ArrowBackIosIcon style={{fontSize:'18px'}}/> Back</Button>
 
                  <div className="flex items-center">
-                     <Button style={{textTransform:'capitalize',backgroundColor:'white',color:'#4a86f7',border:'none'}}>Recover Password</Button>
+                     {/* <Button style={{textTransform:'capitalize',backgroundColor:'white',color:'#4a86f7',border:'none'}}>Recover Password</Button> */}
                      <Button variant="contained" color="primary" style={{textTransform:'capitalize',backgroundColor:'#4a86f7',marginLeft:'1.5em'}} onClick={Login}>Login</Button>
                  </div>
                  </div>

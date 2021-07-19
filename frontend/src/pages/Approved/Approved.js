@@ -46,7 +46,12 @@ export default function Approved({approved}) {
             <section className="w-2/12 flex justify-center items-center">
                 <div className="text-sm  font-bold text-blue-500">
                 {/* <ApplicationModal data={data}/> */}
-                Forwarded to<span className="capitalize m-1">{data.application.status}</span>
+                {data.application.approved?
+                <div className="text-green-500 capitalize m-1">
+                    Approved
+                </div>:
+                <div>Status:&nbsp;Forwarded to <span className="capitalize m-1">{data.application.status}</span></div>
+                }
                 </div>
             </section>
 

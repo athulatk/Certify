@@ -24,13 +24,14 @@ exports.applications=async(req, res)=>{
             const data=[]
         
             for(var index in dataApplication){
+                console.log('Index=',index);
                 
                 await batch.findOne({_id:dataApplication[index].batchId},(err,log)=>{
                     semester=log.semester
                 })
         
                 await studentUser.findOne({ktuId:dataApplication[index].studentId},(err,log)=>{
-                    console.log(log)
+                   // console.log(log)
                     log["_doc"].department=req.query.department
                     log["_doc"].semester=semester
                     data.push({
@@ -39,8 +40,8 @@ exports.applications=async(req, res)=>{
                     })
                 })
             }
-            data.sort((a,b)=>b.application.date - a.application.date)
-            console.log(data)
+            //data.sort((a,b)=>b.application.date - a.application.date)
+            //console.log(data)
             res.send(data)
         }
         

@@ -18,6 +18,7 @@ function ChangePassword(props) {
 
     const submitHandler = (e)=>{
         e.preventDefault();
+        console.log(props.loggedIn)
         if(password===confirmPassword){
             axios.post(`${baseUrl}/${props.loggedIn}/passwordChange`,{
                 email:props.user.email,
